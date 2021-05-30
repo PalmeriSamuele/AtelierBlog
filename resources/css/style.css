@@ -1,0 +1,42 @@
+main {
+    min-height: 78vh;
+}
+
+
+
+/*
+ * ARTICLES
+ */
+
+.article-image.preview {
+    height: 150px !important;
+    width: auto;
+}
+
+.articles > .article {
+    margin-bottom : 1em;
+}
+
+/*
+ * USERS
+ */
+
+.user-avatar {
+    height: 2.5rem;
+}
+.user-avatar.small {
+    height: 2rem;
+}
+
+.user-login-container {
+    min-width: 15rem;
+    padding: 1rem;
+}
+
+.users > .user {
+    margin-bottom : 1em;
+}
+
+.fade {
+    transition-delay: 2s;
+}
