@@ -1,68 +1,98 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/app/session.php'); ?>
+<?php 
+    require($_SERVER['DOCUMENT_ROOT'].'/php_simple/app/session.php'); 
+    require('../../app/fonctions.php');
+    $notconnected = 'Vous devez etre connecte';
+    $comment = null;
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];  
+        if (isset($_POST['comment'])) {
+            if (isset($_SESSION['name'])) {
 
-<?php require($_SERVER['DOCUMENT_ROOT'].'/php_simple/config/connect.php');
-
-$id = null;
-
-if(isset($_GET['id'])) {
-    $id = $_GET['id'];
-}
-
-$article = null;
-
-if(isset($db) && isset($id)) {
-    try {
-        $sql = "SELECT id, title, contenu FROM article where id = :id LIMIT 1";
-
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $article = $stmt->fetch();
-
-        if(!$article) {
-            $article = null;
+                $comment = addComment($_POST['comment'], $id, getId($_SESSION['name']));
+                
+            }
+            unset($comment);
+            if (!isset($_SESSION['name'])) { ?>
+                <div class="alert alert-danger "> 
+                <?= $notconnected;
+                    } ?>
+                </div>
+                <?php
         }
 
-        $db = null;
-    } catch (Exception $exception) {
-        echo $exception;
+        $article = getArticle($id);
+        $comments = getComments($id); 
     }
-}
+
 ?>
 
-<!doctype html>
-<html lang="fr">
-<head>
-    <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/headers.php') ?>
+<!DOCTYPE html>
 
-    <script>
+<html>
+    <head>
+        <meta charset="utf8"/>
+        <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/headers.php') ?> 
+        <title><?= $article->titre ?> </title>
+    </head>
 
-    </script>
-
-    <title>Home blog</title>
-</head>
-<body>
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/navigation.php') ?>
-
-<main role="main">
-    <?php echo realpath('app/session.php') ?>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <?php
-                    if(is_null($article)) {
-                        require($_SERVER['DOCUMENT_ROOT'] . '/php_simple/components/errors/not_found.php');
-                    } else {
-                        require($_SERVER['DOCUMENT_ROOT'] . '/php_simple/components/articles/article_component.php');
-                        
-                    }
-                ?>
+    <body>
+               
+    <?php if (isset($_GET['message']))  { ?>
+            <div class="alert alert-danger"> 
+                <?= $_GET['message'] ?>
             </div>
-        </div>
-    </div>
-</main>
+            <?php } ?>
+        <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/navigation.php'); ?>
+           
 
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/footer.php') ?>
+        <h1><?= $article->titre ?></h1>
+        <p> <?= $article->nbLikes?></p>
+        <?php ?> 
+        <?php if (hasLikesBy($article->id,getId($_SESSION['name']))) { 
+                    $operationlike = '0';
+                } 
+                else {
+                    $operationlike = '1';
+                }
+        ?>
+        <a href="/php_simple/components/articles/updateLikes.php?articleid=<?=$article->id?>&userid=<?=getId($_SESSION['name'])?>&operationlike=<?=$operationlike?>" >
+        <?php
+         
+            if (hasLikesBy($article->id,getId($_SESSION['name']))) {
+                $operationlike = '0';
+                echo "J'aime pas";
+                
+            }
+            else {
+                $operationlike = '1';
+                echo "J'aime";
+                
+            }
+        ?></a>
+        <time> <?= $article->date ?></time>
+        <p> <?= $article->contenu ?> </p>
+        <a href="/php_simple/components/articles/deleteArticle.php?userid=<?=getId($_SESSION['name']) ?>&articleid=<?= $article->id?>&authorid=<?= $article->authorid ?>">delete article</a>
 
-</body>
+        <hr />
+
+        <form action="article.php?id=<?=$article->id?>" method="POST">
+            <textarea name="comment" placeholder="Leave a comment here" id="comment"  cols="100" rows="5" required></textarea>
+            <button type="submit" class="btn btn-primary mt-2"> Envoyer</button>
+        </form> 
+
+        <h2>Commentaires : </h2>
+        <?php foreach($comments as $comment): ?>
+            
+            <h3><?= getName($comment->authorid) ?></h3>
+            <time> <?= $comment->date ?></time>
+            <p><?= $comment->contenu ?></p>
+            <a href="/php_simple/components/articles/deleteComment.php?id=<?= $comment->id ?>&articleid=<?= $id?>&authorid=<?=$comment->authorid?>"> delete  </a>
+
+           
+
+        <?php endforeach;  ?>
+    
+     
+    <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/footer.php') ?>
+    </body> 
 </html>

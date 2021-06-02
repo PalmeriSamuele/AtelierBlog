@@ -5,13 +5,13 @@
     $notconnected = 'Vous devez etre connecte';
     if (!empty($_POST)) {
         $id = getId($_SESSION['name']);
-        if (isset($_POST['titre']) and isset($_POST['contenu']) and isset($_SESSION['name']) and checkPermission($id) !== null) {
+        if (isset($_POST['titre']) and isset($_POST['contenu']) and isset($_SESSION['name']) and checkPermission($id)->role !== null) {
             addArticle($_POST['titre'],$_POST['contenu'],$id);
             updateNbArticles($id,"");   // on update le nb articles dans la bdd +1
             $msuccess = "Article enregistré";
         }
-        if (!isset($_POST['titre']) and !isset($_POST['contenu'])) { 
-            $merror = "Echec de l'enregistrement !";
+        else { 
+            $merror = "Vous n'avez pas les droits pour cette action";
         }
     }
 

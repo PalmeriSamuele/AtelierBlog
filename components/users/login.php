@@ -1,5 +1,5 @@
 <?php
-   
+
    
     $errors = null;
     $success = null;
@@ -9,14 +9,16 @@
         $name = $_POST['email'];
         $mdp = $_POST['password'];
         if (!isset($name) or empty($name)) {
-            $errors = "Met un pseudo";
+            $errors = "Veuillez insérer un pseudo/email!";
             $_SESSION['name'] = null;
+            header('Location: /php_simple/index.php?fail=' . $errors);
         
             
         }
         if (empty($mdp)) { 
-            $errors = "Met un mot de passe";
+            $errors = "Veuillez insérer un mot de passe !";
             $_SESSION['name'] = null;
+            header('Location: /php_simple/index.php?fail=' . $errors);
          
        
         }
@@ -25,12 +27,13 @@
      
             if (checkIfExist($name, $mdp)) {
                 $_SESSION['name'] = $name;
-                $success = 'vous etes connecte, bienvenue ';
+                $success = 'Vous etes connecté, bienvenue ';
+                header('Location: /php_simple/index.php?succes=' . $success);
             }
             else {
                 $errors = 'Email ou mot de passe incorect';
                 $_SESSION['name'] = null;
-                
+                header('Location: /php_simple/index.php?fail=' . $errors);
      
             }
                 
@@ -166,8 +169,9 @@
         </li>
 
         <li id="connected">        
+            <li><a class="dropdown-item" href="/php_simple/pages/users/profil.php?userid=<?=getId($_SESSION['name'])?>">Mon profil</a></li>
             <li><a class="dropdown-item" href="">Modifier son profil</a></li>
-            <li><hr class="dropdown-divider"></li>
+            <li><hr class="dropdown-divider" ></li>
             <li><a class="dropdown-item" href="/php_simple/pages/users/logout.php">Déconnexion</a></li>
         </li>
 

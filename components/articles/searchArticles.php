@@ -1,7 +1,10 @@
 <?php 
+    require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/app/session.php'); 
     require_once('../../app/fonctions.php');
     $articlesSearch = searchArticles($_GET['search']);
-
+    if (is_string($articlesSearch)){
+        $fail = $articlesSearch;
+    }
 ?>
 
 <!doctype html>
@@ -13,24 +16,34 @@
             <title>Home blog</title>
         </head>
         <body>
+
         <?php require_once('../../components/navigation.php') ?>
+        <?php if (isset($fail)) { ?>
+            <div class="alert alert-danger"> 
+                <?= $fail ?>
+            </div>
+        <?php } ?>
         <main role="main">
             <div class="container">
+            <?php require('../../components/articles/OrderBy.php');  ?>
                 <div class="row">
                     
                     <?php
-                    for ($i = 0; $i < count($articlesSearch); $i++) {  ?>
+                    if (!is_string($articlesSearch)) {
+                        foreach ($articlesSearch as $article): ?>
                 
-                        <div class="col articles">
-                            <div class="card mx-auto mb-3" style="width: 18rem;">
-                        
-                                <div class="card-body">
-                                <h2><?= $articlesSearch[$i]->titre ?> </h2>
-                                <a class="btn btn-primary" href="/php_simple/article.php?id=<?=$articlesSearch[$i]->id?>">lire la suite</a>
-                                <a href="articles.php?articleid=<?= $articlesSearch[$i]->id ?>">Épingler l'article</a>
+                            <div class="col articles">
+                                <div class="card mx-auto mb-3" style="width: 18rem;">
+                            
+                                    <div class="card-body">
+                                    <h2><?= $article->titre ?> </h2>
+                                    <a class="btn btn-primary" href="/php_simple/article.php?id=<?=$article->id?>">lire la suite</a>
+                                    <a href="articles.php?articleid=<?= $article->id ?>">Épingler l'article</a>
+                                </div>
                             </div>
-                        </div>
+                        <?php endforeach; ?> 
                     <?php } ?>
+
                     
                 </div>
             </div>

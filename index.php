@@ -1,10 +1,15 @@
 <?php 
     require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/app/session.php'); 
     require('app/fonctions.php');
-    $articles = getArticles();
-    $users = getUsers();
-
-
+    
+    $succes = null;
+    $fail = null;
+    if (isset($_GET['fail']))  {
+        $fail = $_GET['fail'];
+    }
+    if (isset($_GET['succes']))  {
+        $succes = $_GET['succes'];
+    }
 
 
 ?>
@@ -23,14 +28,14 @@
     <title>Home blog</title>
 </head>
 <body>
-<?php if (isset($_GET['succes']))  { ?>
+        <?php if (isset($succes)) { ?>
         <div class="alert alert-success"> 
-            <?= $_GET['succes'] ?>
+            <?= $succes ?>
         </div>
         <?php } ?>
-    <?php if (isset($_GET['fail']))  { ?>
+        <?php if (isset($fail))  {?>
         <div class="alert alert-danger"> 
-            <?= $_GET['fail'] ?>
+            <?= $fail ?>
         </div>
         <?php } ?>
 <?php require_once('components/navigation.php') ?>
@@ -50,7 +55,7 @@
                                 <div class="card-body">
                                 
                                     <h2><?= $articles[$i]->titre ?> </h2>
-                                    <a class="btn btn-success" href="/php_simple/article.php?id=<?=$articles[$i]->id?>">lire la suite</a>
+                                    <a class="btn btn-success" href="/php_simple/pages/articles/article.php?id=<?=$articles[$i]->id?>">lire la suite</a>
                                     
                                 </div>
                             </div>
@@ -78,7 +83,7 @@
             <div class="card-body">
             
                 <h2><?= $articles[$i]->titre ?> </h2>
-                <a class="btn btn-primary" href="/php_simple/article.php?id=<?=$articles[$i]->id?>">lire la suite</a>
+                <a class="btn btn-primary" href="/php_simple/pages/articles/article.php?id=<?=$articles[$i]->id?>">lire la suite</a>
             </div>
         </div>
      <?php endfor;  ?>
