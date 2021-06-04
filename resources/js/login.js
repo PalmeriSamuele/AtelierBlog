@@ -1,7 +1,7 @@
 
 window.addEventListener("DOMContentLoaded", (event) => {
     
-    var connected = document.getElementById('connected');
+    var connected = document.getElementById('connected2');
     var notconnected = document.getElementById('notconnected');
 
     console.log(connect.innerHTML);
@@ -12,14 +12,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
         console.log('salut');
 
         document.getElementById('notconnected').style.display = "inline";
-        document.getElementById('connected').style.display = "none";
+        document.getElementById('connected2').style.display = "none";
 
     
 
     }
 
     else {
-        document.getElementById('connected').style.display = "inline";
+        document.getElementById('connected2').style.display = "inline";
         document.getElementById('notconnected').style.display = "none";
     }
 

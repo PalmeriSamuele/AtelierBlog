@@ -20,10 +20,10 @@
 //     }
 //   }
  ?> 
-<!-- 
+
  <div class="dropdown">
     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-     <?php  /*
+     <?php  
 
       if (isset($_GET['orderby'])) {
           echo $_GET['orderby'];
@@ -32,11 +32,10 @@
       else {
           echo 'Trier par';
       }
-*/
+
     ?> 
-    </a> -->
-<!-- 
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">  -->
+    </a> 
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"> 
       <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "desc"?>">Date desc</a> 
 
       <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "asc"?>">Date asc</a>
@@ -44,8 +43,8 @@
       <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "moreVues"?>">plus de vues</a>
       <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "lessVues"?>">moins de vues</a>
       <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "ABC"?>">A...Z</a>
-  <!-- </ul>
-</div> -->
+ </ul>
+</div>
 
 <!-- 
 <form method="POST" action="orderBy.php">

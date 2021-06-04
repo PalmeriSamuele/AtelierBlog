@@ -41,13 +41,13 @@
     
             <div class="row">
                 
-                <div class=" col col-lg-12 col-md-10 col-sm-9 col-7 pinned-articles articles mt-4">
+                <div class="pinned-articles">
                     
                     <?php $i=0;
                         $rep = false;
                         while($i < count($articles)):
                             if ($articles[$i]->isPinned == 1): ?>
-                                <h2 class="fas fa-star article-item main-titre  col col-lg-12 col-md-9 col-sm-5 col-5">Article mit en avant</h2>
+                                <h2 class="fas fa-star article-item main-titre ">Article mit en avant</h2>
                                 <?php
                                 $rep = true; ?>
                                 <div class="mx-auto mb-3 pinned-article">
@@ -77,18 +77,18 @@
         else {
             $to = count($articles);
         }?>
-        <h2 class="article-item main-titre col col-lg-12 col-md-9 col-sm-5 col-5" >Articles récents</h2>
-        <div class=" main-bloc ">
+        <h2 class="article-item main-titre col col-lg-12 col-md-10 col-sm-9 col-9" >Articles récents</h2>
+        <div class=" main-bloc  col col-lg-12 col-md-9 col-sm-12 col-12 ">
 
 
 
         <?php foreach($articles as $article):  ?>
 
-            <div class="card-article card mx-auto">
-            <?php if (isset($article->imagePath)) {?>-
+            <div class="card-article card mx-auto ">
+            <?php if (isset($article->imagePath)) {?>
                         <img class="card-img-top" src="<?= $article->imagePath ?>" alt="Card image cap">
                         <?php } ?>
-                    <div class="card-body col-lg-5">
+                    <div class="card-body">
                         <h5 class="card-title"><?= $article->titre ?></h5>
                         <p class="card-text"><?=$article->résumé ?> </p>
                         <a href="/php_simple/pages/articles/article.php?id=<?=$article->id?>&vue= <?= $article->id?>" class="btn btn-primary">lire la suite</a>

@@ -106,10 +106,10 @@
                 </div>
             </form>
         </li>
-        <li id="connected">        
-            <li><a class="dropdown-item" href="/php_simple/pages/users/profil.php?userid=<?=getId($_SESSION['name'])?>">Mon profil</a></li>
-            <li><hr class="dropdown-divider" ></li>
-            <li><a class="dropdown-item" href="/php_simple/pages/users/logout.php">Déconnexion</a></li>
+        <li id="connected2">        
+            <a class="dropdown-item" href="/php_simple/pages/users/profil.php?userid=<?=getId($_SESSION['name'])?>">Mon profil</a>
+            <hr class="dropdown-divider" >
+            <a class="dropdown-item" href="/php_simple/pages/users/logout.php">Déconnexion</a>
         </li>
  
 
