@@ -1,12 +1,30 @@
 <?php 
-    $articles = getArticles();
+    $articles = getArticles("desc");
     $users = getUsers();  
 
 
-function getArticles()
+function getArticles($orderby)
 {
+    $decr = "ORDER BY id DESC";
+    $asc = "ORDER BY id ASC";
+    $moreVues = "ORDER BY nbVues DESC";
+    $lessVues = "ORDER BY nbVues ASC";
+    $abc = "";
     require('db.php');
-    $sql = "SELECT * from article ORDER BY id DESC";
+    if ($orderby === "desc")
+        $sql = "SELECT * from article " . $decr;
+
+    else if ($orderby === "asc")
+        $sql = "SELECT * from article " . $asc;
+
+    else if ($orderby === "moreVues")
+        $sql = "SELECT * from article " . $moreVues;
+
+    else if ($orderby === "lessVues")
+        $sql = "SELECT * from article " . $lessVues;
+    else 
+        $sql = "SELECT * from article ";
+
     $req = $bdd->prepare($sql);
     $req->execute();
     $data =  $req->fetchAll(PDO::FETCH_OBJ);
@@ -54,7 +72,7 @@ function getUser($id)
     }
     $req->closeCursor();
 }
-
+// recupere les articles en fonction de l'id de l'auteur
 function getArticlesById($id) {
     require('db.php');
     $req = $bdd->prepare("SELECT * FROM article WHERE authorid = ?");
@@ -64,15 +82,22 @@ function getArticlesById($id) {
     $req->closeCursor();
 }
 
-function addArticle($titre, $contenu, $authorid) 
+// ajoute un article a la base de donnée
+function addArticle($titre, $contenu, $authorid,$resume,$theme,$imgPath=null) 
 {
     require('db.php');
     // if (strlen($contenu) <= 3) return 'short';
     // if (strlen($titre)===0 ) return 'notitle';
     // if (strlen($titre) >= 10) return 'Ttoolong';
     // if (strlen($contenu >= 2000)) return 'Atoolong';
-    $req = $bdd->prepare("INSERT INTO article(titre, contenu, authorid,date) VALUES (?,?,?,NOW())");
-    $req->execute(array($titre,$contenu,$authorid));       
+    if (isset($imgPath)){
+        $req = $bdd->prepare("INSERT INTO article(titre, contenu, authorid,résumé,theme,imagePath,date) VALUES (?,?,?,?,?,?,NOW())");
+        $req->execute(array($titre,$contenu,$authorid,$resume,$theme,$imgPath));   
+    }
+    else {
+        $req = $bdd->prepare("INSERT INTO article(titre, contenu, authorid,résumé,theme,date) VALUES (?,?,?,?,?,NOW())");
+        $req->execute(array($titre,$contenu,$authorid,$resume,$theme));   
+    }       
     $req->closeCursor();
     
 }
@@ -126,25 +151,23 @@ function checkPermission($id) {
 
 function deleteArticle($id) {
     require('db.php');
-
-
-    $reqselectcom = $bdd->prepare("SELECT id FROM comment WHERE authorid = ?");
+    $reqselectcom = $bdd->prepare("SELECT id FROM comment WHERE articleId = ?");
     $reqselectcom->execute(array($id));
-    if ($reqselectcom->rowCount() >= 1) {
-        $commentarticle = $reqselectcom->fetchAll(PDO::FETCH_OBJ);
-        foreach($commentarticle  as $comment): 
-            deleteComment($comment->id);
-        endforeach;
-    }
+    $commentarticle = $reqselectcom->fetchAll(PDO::FETCH_OBJ);
+    var_dump($commentarticle);
+    echo 'salut';
+    foreach($commentarticle as $comment): 
+        deleteComment($comment->id);
+    endforeach;
 
-    $reqselectlike = $bdd->prepare("SELECT id FROM Likes WHERE articleid = ?");
+    $reqselectlike = $bdd->prepare("SELECT id, authorid FROM Likes WHERE articleid = ?");
     $reqselectlike->execute(array($id));
-    if ($reqselectlike->rowCount() >= 1) {
-        $likearticle = $reqselectlike->fetchAll(PDO::FETCH_OBJ);
-        foreach($likearticle  as $like): 
-            deleteLike($like->id);
-        endforeach;
-    }
+    $likearticle = $reqselectlike->fetchAll(PDO::FETCH_OBJ);
+    var_dump($likearticle);
+    foreach($likearticle as $like): 
+        deleteLike($id,$like->authorid);
+    endforeach;
+
     
 
     $req = $bdd->prepare("DELETE from article WHERE id = ?");
@@ -155,7 +178,7 @@ function deleteArticle($id) {
 function addComment($contenu, $articleid, $authorid) {
 
     require('db.php');
-    $req = $bdd->prepare("INSERT INTO comment (contenu, articleId, nb_like, authorid, date) VALUES (?,?,?,?, NOW())");
+    $req = $bdd->prepare("INSERT INTO comment (contenu, articleId, nbLike, authorid, date) VALUES (?,?,?,?, NOW())");
     $req->execute(array($contenu,intval($articleid),0,$authorid));
     $req->closeCursor();
 }
@@ -234,11 +257,11 @@ function getId($name) {
 }
 function getName($id) {
     require('db.php');
-    $req = $bdd->prepare("SELECT id, pseudo FROM user WHERE id= ?");
+    $req = $bdd->prepare("SELECT id, pseudo,email FROM user WHERE id= ?");
     $req->execute(array($id));
     if ($req->rowCount() >= 1) {
         $data = $req->fetch(PDO::FETCH_OBJ);
-        return $data->pseudo;
+        return $data;
     }
     else {
         return false;
@@ -287,7 +310,7 @@ function searchArticles($words) {
     if (!empty($words)) {
         require('db.php');
         $articlesValid = [];
-        $articles = getArticles();
+        $articles = getArticles("desc");
 
         foreach ($articles as $article):
                 if (is_numeric(strpos(strtolower($article->titre),$words)) || is_numeric(strpos(strtolower($article->contenu),$words))) {  // verifie la presence d'un mots dans une chaine de caractere 
@@ -372,4 +395,41 @@ function updateRole($id, $role) {
     $requpdate->execute(array($role,$id));
     $requpdate->closeCursor();
 }
+
+function sortABC($dArray) {
+    $arraySort = [];
+    $arrayToWork = [];
+    $pos = 0;
+    //var_dump($dArray);
+    foreach( $dArray as $array):
+        if (isset($array->titre)) {
+            $arrayToWork[$pos] = $array->titre;
+        }
+        $pos++;
+    endforeach;
+    asort($arrayToWork); 
+
+    foreach($arrayToWork as $key => $titre):
+        
+        array_push($arraySort, $dArray[$key]);
+    endforeach;
+
+    return $arraySort;
+}
+
+// add vue a un article
+function addVues($articleid) {
+    require("db.php");
+    $reqselect = $bdd->prepare("SELECT nbVues FROM article WHERE id = ?");
+    $reqselect->execute(array($articleid));
+    $data = $reqselect->fetch(PDO::FETCH_OBJ);
+    $nbVues = $data->nbVues;
+
+    $requpdate = $bdd->prepare("UPDATE article SET nbVues = ? WHERE id = ?");
+    $requpdate->execute(array($nbVues+1,$articleid));
+    $reqselect->closeCursor();
+    $requpdate->closeCursor();
+}
+
+
 ?>

@@ -10,7 +10,7 @@
     }                                                                                                                                                                            
 
     $userarticles = getArticlesById($userid);
-    $articles = getArticles();
+    $articles = getArticles("");
 
     if (isset($_GET['articleid'])) {
         if (checkPermission(getId($_SESSION['name']))->role == 1) {
@@ -41,13 +41,15 @@
 
 
     if (isset($_POST['modpseudo'])) {
-        updatePseudo(getId($_SESSION['name']),$_POST['modpseudo']);
-        header('Location: /php_simple/pages/users/profil.php?user=' . $_GET['user'] );
+        $userid = getId($_SESSION['name']);
+        updatePseudo($userid,$_POST['modpseudo']);
+        header("Location: /php_simple/pages/users/logout.php?succes=Votre pseudo a été changé en " . $_POST['modpseudo'] . ", veuillez vous reconnecter");
         
     }
     if (isset($_POST['modpassword'])) {
-        updatePassword(getId($_SESSION['name']),$_POST['modpassword']);
-        header('Location: /php_simple/pages/users/profil.php?user=' . $_GET['user'] );
+        $userid = getId($_SESSION['name']);
+        updatePassword($userid,$_POST['modpassword']);
+        header("Location: /php_simple/pages/users/logout.php?succes=Votre mot de passe a été changé en " . $_POST['modpassword']. ", veuillez vous reconnecter");
     }
     
     if (isset($_GET['updateuser'])) {
@@ -56,15 +58,15 @@
             $changerole = $_POST['changerole'];
             if ($changerole === "admin") {
                 updateRole($updateuser ,1);
-                $succes = "Le role de " . getName($updateuser) . " a été modifié en admin";
+                $succes = "Le role de " . getName($updateuser)->pseudo . " a été modifié en admin";
             }
             if ($changerole === "auteur") {
                 updateRole($updateuser ,0);
-                $succes =  "Le role de " . getName($updateuser) . " a été modifié en auteur";
+                $succes =  "Le role de " . getName($updateuser)->pseudo . " a été modifié en auteur";
             }
             if ($changerole === "visiteur") {
                 updateRole($updateuser ,null);
-                $succes =  "Le role de " . getName($updateuser) . " a été modifié en visiteur";
+                $succes =  "Le role de " . getName($updateuser)->pseudo . " a été modifié en visiteur";
             }
 
         }
@@ -92,28 +94,30 @@
             </div>
         <?php } ?>
     <?php require_once('../../components/navigation.php') ?>
-    <h2>Vos données :</h2>
-    <div>
-        <p>pseudo : <?= $user->pseudo ?> </p> 
-        <form action="profil.php?user=<?= $_GET['user']?>" method="POST">
-            <input type="text" name="modpseudo" id="modpseudo">
-            <button type="submit">modifier</button>
-        </form>
+    <h2 class="profil-titre">Vos données </h2>
+    <div class="mx-auto">
+        <div class="profil-perso-data">
+            <p class="label-info-perso">pseudo  <?= $user->pseudo ?> </p> 
+            <form class="label-info-perso" action="profil.php?userid=<?= getId( $_GET['userid'])?>" method="POST">
+                <input type="text" name="modpseudo" id="modpseudo">
+                <button type="submit">modifier</button>
+            </form>
+        </div>
+        <div class="profil-perso-data">
+            <p class="label-info-perso">password  <?= $user->password ?> </p> 
+            <form action="profil.php?userid=<?= getId($_GET['userid'])?>" method="POST">
+                <input type="text" name="modpassword" id="modpassword">
+                <button type="submit">modifier</button>
+            </form>
+        </div>
     </div>
-    <div>
-        <p>password : <?= $user->password ?> </p> 
-        <form action="profil.php?user=<?= $_GET['user']?>" method="POST">
-            <input type="text" name="modpassword" id="modpassword">
-            <button type="submit">modifier</button>
-        </form>
-    </div>
-    <h2>Vos articles :</h2>
+    <h2 class="profil-titre">Vos articles</h2>
     <?php 
     if (isset($articles)) {
         foreach($userarticles as $article): ?>
             <div class="card mx-auto mb-3" style="width: 18rem;">
                 <div class="card-body">
-                    <h2><?= $article->titre ?> </h2>
+                    <h2 class="card-title "><?= $article->titre ?> </h2>
                     <a class="btn btn-primary" href="/php_simple/pages/articles/article.php?id=<?=$article->id?>">lire la suite</a>
                 </div>
             </div>
@@ -124,15 +128,16 @@
     } ?>
     
 <?php if (checkPermission(getId($_SESSION['name']))->role == 1) { ?>
-    <h2> Utilisateurs :</h2>
+    <h2 class="profil-titre"> Utilisateurs </h2>
         <div class="container">
                 <div class="row">
-                    <div class="col articles">
+                    <div class="col col-sm">
                     <?php foreach($users as $user): ?>
-                        <div class="user card">
-                            <p>nom <?= $user->pseudo ?></p>
-                            <p> email  <?= $user->email ?></p>
-                            <a href="/php_simple/components/users/deleteUser.php?superid=<?=getId($_SESSION['name'])?>&userid=<?= $user->id?>"> delete </a>
+                        <div class="user card profil-user mx-auto">
+                            <div class="profil-user-info">
+                                <p><?= $user->pseudo ?></p>
+                                <a href="/php_simple/components/users/deleteUser.php?superid=<?=getId($_SESSION['name'])?>&userid=<?= $user->id?>" class="fas fa-trash-alt">  </a>
+                            </div>
                             <form action="profil.php?userid=<?= getId($_SESSION['name'])?>&updateuser=<?= $user->id?>" method="POST">
                                 <input type="radio" name="changerole" value="admin" id="admin">
                                 <label for="admin">admin</label>
@@ -142,14 +147,14 @@
                                 <label for="visiteur">visiteur</label>
                                 <button type="submit">modifier</button>
                             </form>
-                            </div>
+                        </div>
                     <?php endforeach; ?>
                 </div>
             </div>
         </div>
 
 <hr>
-<h2>Tous les articles :</h2>
+<h2 class="profil-titre" >Tous les articles </h2>
         <div class="container">
         <div class="row">
             <?php require('../../components/articles/orderBy.php');  ?>
@@ -157,28 +162,33 @@
                 <div class="col articles">
                     <div class="card mx-auto mb-3" style="width: 18rem;">
                         <div class="card-body">
-                        <h2><?= $article->titre ?> </h2>
+                        <h2 class="article-titre"><?= $article->titre ?> </h2>
                         <a class="btn btn-primary" href="/php_simple/pages/articles/article.php?id=<?=$article->id?>">lire la suite</a>
-                        <a href="profil.php?articleid=<?= $article->id ?>"> 
+                        <a href="profil.php?articleid=<?= $article->id ?>" class="far fa-star" id="pinneLink" onclick="changeClassDePinne()" > 
                         <?php
 
                             if ($artPinned) {
                                 if ($artPinned->id == $article->id) {
                                     $valupdate = 0;
-                                    echo "Dépingler l'article";
+                                    echo 'dépingler';
+        
+
                                 }
                                 else {
                                     $valupdate = 1;
-                                    echo "Épingler l'article";
+                                    echo 'épingler';
+                           
                                 }
                             } 
                             else {
                                 $valupdate = 1;
-                                echo "Épingler l'article";
+                                echo 'épingler';
                             }
 
                         ?>
                         </a>
+            
+                        <a href="/php_simple/components/articles/deleteArticle.php?userid=<?=getId($_SESSION['name']) ?>&articleid=<?= $article->id?>&authorid=<?= $article->authorid ?> " class="fas fa-trash-alt"></a>
                     </div>
                 </div>
             <?php endforeach; ?>

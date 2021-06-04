@@ -1,10 +1,10 @@
 
 
 <header>
-    <nav class="navbar-expand-lg navbar navbar-dark bg-dark mb-5">
+    <nav class="navigation navbar-expand-lg navbar navbar-dark mb-5">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
-                <img src="/resources/images/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-top">
+                Handl
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -34,8 +34,7 @@
                             </div>
                         </nav>
                     </li>
-                    <li class="nav-item dropdown">
-                        
+                    <li>
                         <?php
                             require($_SERVER['DOCUMENT_ROOT'] . '/php_simple/components/users/login.php');
                         ?>

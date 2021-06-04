@@ -36,9 +36,8 @@
                                 <div class="card mx-auto mb-3" style="width: 18rem;">
                             
                                     <div class="card-body">
-                                    <h2><?= $article->titre ?> </h2>
-                                    <a class="btn btn-primary" href="/php_simple/article.php?id=<?=$article->id?>">lire la suite</a>
-                                    <a href="articles.php?articleid=<?= $article->id ?>">Épingler l'article</a>
+                                    <h2 class="card-title"><?= $article->titre ?> </h2>
+                                    <a class="btn btn-primary" href="/php_simple/pages/articles/article.php?id=<?=$article->id?>">lire la suite</a>
                                 </div>
                             </div>
                         <?php endforeach; ?> 

@@ -11,7 +11,6 @@
         $succes = $_GET['succes'];
     }
 
-
 ?>
 
 
@@ -20,9 +19,8 @@
 <html lang="fr">
 <head>
     <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/headers.php') ?> 
-
-	<script>
-	
+	<script type="text/javascript">
+	    document.getElementById('notconnected').style.display = "none";
 	</script>
 
     <title>Home blog</title>
@@ -40,84 +38,100 @@
         <?php } ?>
 <?php require_once('components/navigation.php') ?>
 
-<main role="main">
+<main role="main ">
+    <div class="main-container mx-auto">
     
-    <div class="container">
-        <div class="row">
-            <div class="col pinned-articles articles">
-                <?php $i=0;
-                    $rep = false;
-                    while($i < count($articles)):
-                        if ($articles[$i]->isPinned == 1):
-                            $rep = true; ?>
-                            <div class="card mx-auto mb-3" style="width: 18rem;">
-                                
-                                <div class="card-body">
-                                
-                                    <h2><?= $articles[$i]->titre ?> </h2>
-                                    <a class="btn btn-success" href="/php_simple/pages/articles/article.php?id=<?=$articles[$i]->id?>">lire la suite</a>
+            <div class="row">
+                
+                <div class=" col col-lg-12 col-md-10 col-sm-9 col-7 pinned-articles articles mt-4">
+                    
+                    <?php $i=0;
+                        $rep = false;
+                        while($i < count($articles)):
+                            if ($articles[$i]->isPinned == 1): ?>
+                                <h2 class="fas fa-star article-item main-titre  col col-lg-12 col-md-9 col-sm-5 col-5">Article mit en avant</h2>
+                                <?php
+                                $rep = true; ?>
+                                <div class="mx-auto mb-3 pinned-article">
                                     
+                                    <div class="card-body">
+                                    
+                                        <h2><?= $articles[$i]->titre ?> </h2>
+                                        <a class="btn btn-success" href="/php_simple/pages/articles/article.php?id=<?=$articles[$i]->id?>">lire la suite</a>
+                                    
+                                    </div>
                                 </div>
-                            </div>
-                            <hr />
-                        <?php endif; ?>
-                        <?php  $i++; 
-                        endwhile; ?> 
+                                <hr />
+                            <?php endif; ?>
+                            <?php  $i++; 
+                            endwhile; ?> 
+                
+                </div>
+            </div>
+        
+    
+        
+
+        <?php 
+        if (count($articles) >= 3) {
+            $to = 3;
+        }
+        else {
+            $to = count($articles);
+        }?>
+        <h2 class="article-item main-titre col col-lg-12 col-md-9 col-sm-5 col-5" >Articles récents</h2>
+        <div class=" main-bloc ">
+
+
+
+        <?php foreach($articles as $article):  ?>
+
+            <div class="card-article card mx-auto">
+            <?php if (isset($article->imagePath)) {?>-
+                        <img class="card-img-top" src="<?= $article->imagePath ?>" alt="Card image cap">
+                        <?php } ?>
+                    <div class="card-body col-lg-5">
+                        <h5 class="card-title"><?= $article->titre ?></h5>
+                        <p class="card-text"><?=$article->résumé ?> </p>
+                        <a href="/php_simple/pages/articles/article.php?id=<?=$article->id?>&vue= <?= $article->id?>" class="btn btn-primary">lire la suite</a>
+                    </div>
                     
             </div>
+
+
+        <?php endforeach; ?>
+        
+        </div>
+        <h2 class="article-item main-titre  col col-lg-12 col-md-9 col-sm-5 col-5">Top Utilisateurs</h2>
+            <div class="top-users col mt-4">
+                
+                <?php
+                    if (count($users) >= 3) {
+                        $to = 3;
+                    }
+                    else {
+                        $to = count($users);
+                    }
+                for ($i=0; $i < $to; $i++ ):
+                    if ($i === 0) {?>
+                    <div class="user-card firstuser ">
+                    <?php  } else {?>
+                        <div class="user-card col-lg-3 col-md-12 col-sm-12">
+                        <?php } ?>
+                        <p><?= $users[$i]->pseudo ?></p>
+                        <p class="top-user-nb">nombres d'articles écrient</p>
+                        <p><?= $users[$i]->nbArticles ?></p>
+                        </div>
+                <?php endfor; ?>
+            </div>
         </div>
     </div>
 
     
-
-    <?php 
-    if (count($articles) >= 3) {
-        $to = 3;
-    }
-    else {
-        $to = count($articles);
-    }
-    for($i=0; $i<$to; $i++): ?>
-        <div class="card mx-auto mb-3" style="width: 18rem;">
-            
-            <div class="card-body">
-            
-                <h2><?= $articles[$i]->titre ?> </h2>
-                <a class="btn btn-primary" href="/php_simple/pages/articles/article.php?id=<?=$articles[$i]->id?>">lire la suite</a>
-            </div>
-        </div>
-     <?php endfor;  ?>
-
-     <div class="container " id='tohide'>
-        <div class="row">
-            <div class="col articles">
-            <?php
-                if (count($users) >= 3) {
-                    $to = 3;
-                }
-                else {
-                    $to = count($users);
-                }
-             for ($i=0; $i < $to; $i++ ):?>
-
-                <div class="user card">
-                    <p>nom <?= $users[$i]->pseudo ?></p>
-                    <p> email  <?= $users[$i]->email ?></p>
-                    <p><?= $users[$i]->nbArticles ?></p>
-                    </div>
-            <?php endfor; ?>
-        </div>
-    </div>
-
-</main>
-            </div>
-        </div>
-    </div>
     
-    <script src="/php_simple/resources/js/login.js"></script>
 </main>
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/footer.php') ?>
-
+<script src="/php_simple/resources/js/login.js" type="text/javascript"></script>
 </body>
 </html>

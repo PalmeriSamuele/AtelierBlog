@@ -38,67 +38,10 @@
             }
                 
         }
-
-
-
     }
 
     if (isset($_POST['signup']))
         header('Location: /php_simple/components/users/createAccount.php');
-    
-   
-
-    
-
-
-    
-    
-/*
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/php_simple/app/form_utils.php');
-    
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $email = test_input($_POST["email"]);
-        $password = test_input($_POST["password"]);
-
-        if (is_null($email) || $email == '') {
-            $errors  = 'email requis.';
-        }
-
-        if (is_null($password) || $password == '') {
-            $errors  = 'email requis.';
-        }
-        
-        if (empty($errors) && isset($bdd)) {
-            try {
-                $sql = "SELECT * from user where email = :email LIMIT 1";
-
-                $stmt = $bdd->prepare($sql);
-                $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-                $stmt->execute();
-                $user = $stmt->fetch();
-
-                if (!$user) {
-                    $user = null;
-                } else {
-
-                    if(password_verify($password, $user['password'])) {
-                        echo 'succes';
-                        $_SESSION['user'] = $user;
-                        header('Location: http://localhost/php_simple/index.php');
-                    } else {
-                        $user = null;
-                    }
-                }
-
-                $bdd = null;
-            } catch (Exception $exception) {
-                echo $exception;
-            }
-        }
-    }
-    */
-
-
 
 ?>
 
@@ -120,7 +63,7 @@
 
     <div class="dropdown">
    
-        <a  class=" connect btn btn-secondary dropdown-toggle me-5" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        <a  class="connect btn btn-secondary dropdown-toggle me-5" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 
                          <?php  
 
@@ -154,13 +97,7 @@
                     <div id="validation-user-password" class="invalid-feebddack">
                         <?php echo (isset($errors['password']) ? $errors['password'] : '') ?>
                     </div>
-                    <div class="help-block text-right"><a href="">Mot de passe oublié ?</a></div>
-                </div>
-                <!--                        <div class="form-group mt-2">-->
-                <!--                            <label>-->
-                <!--                                <input type="checkbox"> keep me logged-in-->
-                <!--                            </label>-->
-                <!--                        </div>-->
+
                 <div class="form-group mt-2">
                     <button action="login.php" type="submit" name="login" class="btn btn-primary btn-block">Se connecter</button>
                     <button action="login.php" type="submit" name="signup" class="btn btn-success btn-block">S'inscrire</button>
@@ -170,11 +107,10 @@
 
         <li id="connected">        
             <li><a class="dropdown-item" href="/php_simple/pages/users/profil.php?userid=<?=getId($_SESSION['name'])?>">Mon profil</a></li>
-            <li><a class="dropdown-item" href="">Modifier son profil</a></li>
             <li><hr class="dropdown-divider" ></li>
             <li><a class="dropdown-item" href="/php_simple/pages/users/logout.php">Déconnexion</a></li>
         </li>
 
-   </ul>
-    </div>
+    </ul>
+</div>
     

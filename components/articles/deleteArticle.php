@@ -9,7 +9,6 @@ if (isset($_GET['articleid']) && isset($_GET['userid']) && isset($_GET['authorid
 
     $userid = $_GET['userid'];
     $authorid = $_GET['authorid']; 
-    echo $authorid;
     if (checkPermission($userid)->role == 1) {
         $succes = "Article supprimé !";
         deleteArticle($articleid);
