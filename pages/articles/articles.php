@@ -44,7 +44,7 @@
             <?php foreach($articles as $article):  ?>
 
                 <div class="card-article card mx-auto">
-                <?php if (isset($article->imagePath)) {?>-
+                <?php if (isset($article->imagePath)) {?>
                             <img class="card-img-top" src="<?= $article->imagePath ?>" alt="Card image cap">
                             <?php } ?>
                         <div class="card-body col-lg-5">

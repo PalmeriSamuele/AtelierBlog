@@ -63,7 +63,7 @@
 
     <div class="dropdown">
    
-        <a  class="connect btn btn-secondary dropdown-toggle me-5" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        <a  class=" btn btn-secondary dropdown-toggle me-5" href="#" role="button" id="connect" data-bs-toggle="dropdown" aria-expanded="false">
 
                          <?php  
 
@@ -79,6 +79,8 @@
         </a>
     
     <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+
+
 
         <li id="notconnected"> 
             <form class="form user-login-form" role="form" method="POST" accept-charset="UTF-8" action="<?php echo $_SERVER["PHP_SELF"];?>">
@@ -104,12 +106,12 @@
                 </div>
             </form>
         </li>
-
         <li id="connected">        
             <li><a class="dropdown-item" href="/php_simple/pages/users/profil.php?userid=<?=getId($_SESSION['name'])?>">Mon profil</a></li>
             <li><hr class="dropdown-divider" ></li>
             <li><a class="dropdown-item" href="/php_simple/pages/users/logout.php">Déconnexion</a></li>
         </li>
+ 
 
     </ul>
 </div>

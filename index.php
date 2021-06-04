@@ -19,9 +19,7 @@
 <html lang="fr">
 <head>
     <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/headers.php') ?> 
-	<script type="text/javascript">
-	    document.getElementById('notconnected').style.display = "none";
-	</script>
+
 
     <title>Home blog</title>
 </head>
@@ -132,6 +130,6 @@
 </main>
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/footer.php') ?>
-<script src="/php_simple/resources/js/login.js" type="text/javascript"></script>
+
 </body>
 </html>

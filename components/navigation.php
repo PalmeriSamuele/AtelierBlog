@@ -43,4 +43,5 @@
             </div>
         </div>
     </nav>
+    <script src="/php_simple/resources/js/login.js" type="text/javascript"></script>
 </header>

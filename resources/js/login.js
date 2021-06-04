@@ -1,19 +1,26 @@
 
-var connect = document.getElementsByClassName('connect');
-var connected = document.getElementById('connected');
-var notconnected = document.getElementById('notconnected');
+window.addEventListener("DOMContentLoaded", (event) => {
+    
+    var connected = document.getElementById('connected');
+    var notconnected = document.getElementById('notconnected');
 
+    console.log(connect.innerHTML);
+    console.log(connected);
+    console.log(notconnected);
 
-if (connect.innerHTML === 'se connecter') {
+    if (document.getElementById('connect').innerHTML.trim() === "se connecter") {
+        console.log('salut');
 
-    notconnected.style.display = none;
-    connected.style.display = inline;
-}
+        document.getElementById('notconnected').style.display = "inline";
+        document.getElementById('connected').style.display = "none";
 
-else {
-    connected.style.display = none;
-    notconnected.style.display = inline;
-}
+    
 
+    }
 
-notconnected.style.display = none;
+    else {
+        document.getElementById('connected').style.display = "inline";
+        document.getElementById('notconnected').style.display = "none";
+    }
+
+});
