@@ -11,28 +11,42 @@ main {
     min-height: 78vh;
 }
 
+
+body.dark {
+    background-color: #292C35;
+    color: white;
+}
+
 .card-text, .card-title {
     width: 250px;
     overflow: hidden;
-  text-overflow: ellipsis; 
+    text-overflow: ellipsis; 
 } 
 .card-article {
     margin: 1em;
     height: fit-content;
-    width: 700px;
+    max-width: 700px;
     display: flex;
     flex-direction: row;
+}
+.card-article-img {
+    width: 100px;
+    height: 100px;
 
 }
-
-.card-body {
-    max-width: 700px;
-}
-
 .card-img-top {
     height:  200px;
     width: 230px;
 }
+.card {
+    margin: 1rem;
+}
+.profil-articles-box{
+    display: flex;
+    margin: 1rem;
+    flex-wrap: wrap;
+}
+
 
 .pinned-article {
     max-width: 800px;
@@ -82,20 +96,13 @@ main {
     width: auto;
 }
 
-
-/* user main index.php */
-.firstuser {
-    align-self : flex-end;
-}
-.user-card {
-    width: 250px;
-    height: fit-content;
-    border: 1px solid lightgray;
-    font-size: 1.7rem;
-    text-align: center;
-    border-radius: 4px;
+.articles > .article {
+    margin-bottom : 1em;
 }
 
+/*
+ * USERS
+ */
 
 .top-users {
     display: flex;
@@ -118,7 +125,9 @@ main {
     padding: 1rem;
 }
 
-
+.users > .user {
+    margin-bottom : 1em;
+}
 
 .fade {
     transition-delay: 2s;
@@ -143,12 +152,15 @@ footer {
 .article-item {
     text-align: center;
 }
-
+.article {
+    display: flex;
+    flex-direction: column;
+}
 
 .article-img {
     width: 25% ;
     height: 25%;
-    float: left;
+    text-align: center;
 }
 
 
@@ -218,9 +230,45 @@ footer {
 .label-info-perso {
     margin: 10px;
 }
-
+.nav-link {
+    color: #264653;
+}
 .navigation {
-    background-color: #22223b;
+
+    background-color: #fae1dd;
+}
+.toggle {
+    border: 1px solid black;
+}
+.theme-box {
+    position: absolute;
+    right: 5px;
+}
+.theme-bubble {
+    width: 100px;
+}
+.light {
+    background-color: #e2cfc4 ;
+}
+.dark {
+    margin-left: 1rem;
+    background-color: #827081;
+
+}
+.dark:hover {
+    border: 2px solid white;
+}
+.light:hover {
+    border: 2px solid black;
+}
+
+
+.dark:focus , .light:focus {
+    outline: none;
+}
+
+.toggle{
+    color: white;
 }
 
 
@@ -256,3 +304,5 @@ footer {
         display: none;
     }
 }
+
+

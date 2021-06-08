@@ -71,6 +71,10 @@
 
         }
     }   
+
+    if(isset($_POST['searchuser'])) {
+        $users = getSearchtUser($_POST['searchuser']);
+    }
 ?>
 
 
@@ -112,57 +116,83 @@
         </div>
     </div>
     <h2 class="profil-titre">Vos articles</h2>
-    <?php 
-    if (isset($articles)) {
-        foreach($userarticles as $article): ?>
-            <div class="card mx-auto mb-3" style="width: 18rem;">
-                <div class="card-body">
-                    <h2 class="card-title "><?= $article->titre ?> </h2>
-                    <a class="btn btn-primary" href="/php_simple/pages/articles/article.php?id=<?=$article->id?>">lire la suite</a>
-                </div>
-            </div>
-         <?php endforeach;  ?>
-    <?php }
-    else {
-        echo "Vous n'avez pas encore d'articles !";
-    } ?>
     
+    <div class="profil-articles-box">
+        <?php 
+
+        if (isset($userarticles)) {
+            foreach($userarticles as $article): ?>
+                <div class="card mx-auto mb-3 ">
+                    <div class="card-body">
+                        <h2 class="card-title "><?= $article->titre ?> </h2>
+                        <a class="btn btn-primary" href="/php_simple/pages/articles/article.php?id=<?=$article->id?>">lire la suite</a>
+                    </div>
+                </div>
+            <?php endforeach;  ?>
+        <?php }
+        else {
+            echo "Vous n'avez pas encore d'articles !";
+        } ?>
+    </div>
+
 <?php if (checkPermission(getId($_SESSION['name']))->role == 1) { ?>
     <h2 class="profil-titre"> Utilisateurs </h2>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <form action="/php_simple/pages/users/profil.php?userid=<?= getId($_SESSION['name'])?>" method="POST" class="d-flex">
+                <input class="form-control me-2" type="search" name="searchuser" id="searchuser" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
         <div class="container">
                 <div class="row">
                     <div class="col col-sm">
-                    <?php foreach($users as $user): ?>
-                        <div class="user card profil-user mx-auto">
-                            <div class="profil-user-info">
-                                <p><?= $user->pseudo ?></p>
-                                <a href="/php_simple/components/users/deleteUser.php?superid=<?=getId($_SESSION['name'])?>&userid=<?= $user->id?>" class="fas fa-trash-alt">  </a>
+                    <?php
+                    if (!is_string($users)) {
+                        for($i=0 ; $i < count($users); $i++): ?>
+                            <div class="user card profil-user mx-auto">
+                                <div class="profil-user-info">
+                                    <p><?= $users[$i]->pseudo ?></p>
+                                    <a href="/php_simple/components/users/deleteUser.php?superid=<?=getId($_SESSION['name'])?>&userid=<?= $users[$i]->id?>" class="fas fa-trash-alt">  </a>
+                                </div>
+                                <form action="profil.php?userid=<?= getId($_SESSION['name'])?>&updateuser=<?= $users[$i]->id?>" method="POST">
+                                    <input type="radio" name="changerole" value="admin" id="admin">
+                                    <label for="admin">admin</label>
+                                    <input type="radio" name="changerole" value="auteur" id="auteur">
+                                    <label for="aurteur">auteur</label>
+                                    <input type="radio" name="changerole" value="visiteur" id="visiteur">
+                                    <label for="visiteur">visiteur</label>
+                                    <button type="submit">modifier</button>
+                                </form>
                             </div>
-                            <form action="profil.php?userid=<?= getId($_SESSION['name'])?>&updateuser=<?= $user->id?>" method="POST">
-                                <input type="radio" name="changerole" value="admin" id="admin">
-                                <label for="admin">admin</label>
-                                <input type="radio" name="changerole" value="auteur" id="auteur">
-                                <label for="aurteur">auteur</label>
-                                <input type="radio" name="changerole" value="visiteur" id="visiteur">
-                                <label for="visiteur">visiteur</label>
-                                <button type="submit">modifier</button>
-                            </form>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endfor; 
+                    } else { ?>
+                            <div class="alert alert-danger"> 
+                                <?= $users ?>
+                            </div>
+                            <?php } ?>
+ 
                 </div>
             </div>
         </div>
 
 <hr>
-<h2 class="profil-titre" >Tous les articles </h2>
-        <div class="container">
-        <div class="row">
-            <?php require('../../components/articles/orderBy.php');  ?>
-            <?php foreach($articles as $article):  ?>
-                <div class="col articles">
-                    <div class="card mx-auto mb-3" style="width: 18rem;">
-                        <div class="card-body">
-                        <h2 class="article-titre"><?= $article->titre ?> </h2>
+
+
+
+    <h2 class="profil-titre">Tous les articles</h2>
+    <?php require('../../components/articles/OrderBy.php');  ?>
+    <div class="profil-articles-box">
+        <?php 
+
+        if (isset($articles)) {
+            foreach($articles as $article): ?>
+                <div class="card mx-auto mb-3 ">
+                    <div class="card-body">
+                        <h2 class="card-title "><?= $article->titre ?> </h2>
                         <a class="btn btn-primary" href="/php_simple/pages/articles/article.php?id=<?=$article->id?>">lire la suite</a>
                         <a href="profil.php?articleid=<?= $article->id ?>" class="far fa-star" id="pinneLink" onclick="changeClassDePinne()" > 
                         <?php
@@ -191,7 +221,12 @@
                         <a href="/php_simple/components/articles/deleteArticle.php?userid=<?=getId($_SESSION['name']) ?>&articleid=<?= $article->id?>&authorid=<?= $article->authorid ?> " class="fas fa-trash-alt"></a>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            <?php endforeach;  ?>
+        <?php }
+        else {
+            echo "Vous n'avez pas encore d'articles !";
+        } ?>
+    </div>
             
         </div>
     </div>

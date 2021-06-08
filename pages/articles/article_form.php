@@ -1,5 +1,6 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/app/session.php'); 
     require('../../app/fonctions.php');
+    $themes = getThemes();
     $msuccess = null;
     $merror = null ;
     $notconnected = 'Vous devez etre connecte';
@@ -8,10 +9,10 @@
             $id = getId($_SESSION['name']);
             if (isset($_POST['titre']) and isset($_POST['contenu']) and isset($_SESSION['name']) and checkPermission($id)->role !== null) {
                 if (isset($_FILES['image']['name']))
-                    addArticle($_POST['titre'],$_POST['contenu'],$id,$_POST['resume'],$_POST['theme'], "/php_simple/resources/images/articles/" . $_FILES['image']['name'] );
+                    addArticle($_POST['titre'],$_POST['contenu'],$id,$_POST['resume'],$_POST['theme-choice'], "/php_simple/resources/images/articles/" . $_FILES['image']['name'] );
                     
                 else {
-                    addArticle($_POST['titre'],$_POST['contenu'],$id,$_POST['resume'],$_POST['theme']);
+                    addArticle($_POST['titre'],$_POST['contenu'],$id,$_POST['resume'],$_POST['theme-choice']);
                 }
                 updateNbArticles($id,"");   // on update le nb articles dans la bdd +1
                 $msuccess = "Article enregistré";
@@ -22,11 +23,10 @@
         }
 
     }
-       if (isset($_FILES['image']['name'])) {
+    if (isset($_FILES['image']['name'])) {
             $path = "../../resources/images/articles/" . $_FILES['image']['name'] ;
             move_uploaded_file($_FILES['image']['tmp_name'],$path);
-       }
-
+    }
 
 
 
@@ -79,9 +79,16 @@
                     </div>
 
                     <div class="form-group mt-3">
-                        <label for="excerpt">Thème de l'article</label>
-                        <input type="text" name="theme" value="" class="form-control" id="theme" placeholder="Thème" aria-describedby="validation-excerpt">
-                        <div id="validation-excerpt" class="invalid-feedback"></div>
+                    <label for="theme-choice">Choisis le thème de ton article</label>
+                        <input list="theme-choices" id="theme-choice" name="theme-choice" />
+
+                        <datalist id="theme-choices">
+                            <?php foreach($themes as $theme_): ?>
+                                <option value="<?= $theme_->theme?>">
+                            <?php endforeach;?>
+
+                        </datalist>
+                    
                     </div>
                     
                     <div class="form-group mt-3">
@@ -106,7 +113,8 @@
                     </div> 
                     <div class="form-group mt-3">
                         <label for="body">Contenu*</label>
-                        <textarea class="form-control" id="body" name="contenu" rows="20"  aria-describedby="validation-body" required></textarea>
+                        <textarea class="form-control" id="textarea" name="contenu" rows="20"  aria-describedby="validation-body" required></textarea>
+
                         <div id="validation-body" class="invalid-feedback"></div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Publier</button>

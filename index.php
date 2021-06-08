@@ -4,12 +4,16 @@
     
     $succes = null;
     $fail = null;
+
     if (isset($_GET['fail']))  {
         $fail = $_GET['fail'];
     }
     if (isset($_GET['succes']))  {
         $succes = $_GET['succes'];
     }
+
+
+
 
 ?>
 
@@ -21,9 +25,10 @@
     <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/headers.php') ?> 
 
 
+
     <title>Home blog</title>
 </head>
-<body>
+<body id="body2">
         <?php if (isset($succes)) { ?>
         <div class="alert alert-success"> 
             <?= $succes ?>
@@ -47,7 +52,7 @@
                         $rep = false;
                         while($i < count($articles)):
                             if ($articles[$i]->isPinned == 1): ?>
-                                <h2 class="fas fa-star article-item main-titre ">Article mit en avant</h2>
+                                <h2 class="fas fa-star article-item main-titre">Article mit en avant</h2>
                                 <?php
                                 $rep = true; ?>
                                 <div class="mx-auto mb-3 pinned-article">
@@ -82,22 +87,22 @@
 
 
 
-        <?php foreach($articles as $article):  ?>
+        <?php for($i=0 ; $i < $to ;$i++):  ?>
 
             <div class="card-article card mx-auto ">
-            <?php if (isset($article->imagePath)) {?>
-                        <img class="card-img-top" src="<?= $article->imagePath ?>" alt="Card image cap">
+            <?php if (isset($articles[$i]->imagePath)) {?>
+                        <img class="card-img-top" src="<?= $articles[$i]->imagePath ?>" alt="Card image cap">
                         <?php } ?>
                     <div class="card-body">
-                        <h5 class="card-title"><?= $article->titre ?></h5>
-                        <p class="card-text"><?=$article->résumé ?> </p>
-                        <a href="/php_simple/pages/articles/article.php?id=<?=$article->id?>&vue= <?= $article->id?>" class="btn btn-primary">lire la suite</a>
+                        <h5 class="card-title"><?= $articles[$i]->titre ?></h5>
+                        <p class="card-text"><?=$articles[$i]->résumé ?> </p>
+                        <a href="/php_simple/pages/articles/article.php?id=<?=$articles[$i]->id?>&vue= <?= $articles[$i]->id?>" class="btn btn-primary">lire la suite</a>
                     </div>
                     
             </div>
 
 
-        <?php endforeach; ?>
+        <?php endfor; ?>
         
         </div>
         <h2 class="article-item main-titre  col col-lg-12 col-md-9 col-sm-5 col-5">Top Utilisateurs</h2>

@@ -34,6 +34,28 @@ function getArticles($orderby)
 
 
 
+function getArticlesByTheme($theme){
+    require("db.php");
+    $sql = "SELECT * FROM article WHERE theme = ?";
+    $req = $bdd->prepare($sql);
+    $req->execute(array($theme));
+    $data =  $req->fetchAll(PDO::FETCH_OBJ);
+    return $data;
+    $req->closeCursor();    
+}
+
+
+function getThemes(){
+    require("db.php");
+    $arrayThemes = [];
+    $sql = "SELECT theme FROM article ";
+    $req = $bdd->prepare($sql);
+    $req->execute();
+    $data =  $req->fetchAll(PDO::FETCH_OBJ);
+    return $data;
+    $req->closeCursor(); 
+}
+
 function getArticle($id) 
 {
     require('db.php');
@@ -81,6 +103,20 @@ function getArticlesById($id) {
     return $data;
     $req->closeCursor();
 }
+// fonction qui retoune l'utilisateur rechercher sinon false
+function getSearchtUser($user) {
+    require('db.php');
+    $req = $bdd->prepare("SELECT * FROM user WHERE id = ?");
+    $req->execute(array(getId($user)));
+    if ($req->rowCount() >= 1){
+        $data = $req->fetch(PDO::FETCH_OBJ);
+        return [$data];   // afin de pouovoir l'iterer
+    }
+    return "Pas d'utilisateur trouvé avec ce nom !";
+    $req->closeCursor();
+
+}
+
 
 // ajoute un article a la base de donnée
 function addArticle($titre, $contenu, $authorid,$resume,$theme,$imgPath=null) 
@@ -183,7 +219,7 @@ function addComment($contenu, $articleid, $authorid) {
     $req->closeCursor();
 }
 
-
+// recupere les commentaires d'un article
 function getComments($id) {
 
     require('db.php');
@@ -202,7 +238,7 @@ function deleteComment($id) {
     $req->closeCursor();
 }
 
-// retourne l'article épingler
+// retourne l'article épingler si il y en a un sinon false
 function getPinned() {
     require('db.php');
     $req = $bdd->prepare("SELECT * FROM article WHERE isPinned =?");
@@ -216,7 +252,7 @@ function getPinned() {
     return $data;
 }
 
-
+// epingle l'article voulu et dépingler les autres
 function pinneArticle($id, $valupdate) {
 
     require('db.php');
@@ -240,7 +276,7 @@ function pinneArticle($id, $valupdate) {
     $reqselect->closeCursor();
     $requpdate->closeCursor();
 }
-
+// retourne l'id à partir du nom
 function getId($name) {
     require('db.php');
     $req = $bdd->prepare("SELECT id FROM user WHERE pseudo= ? OR email= ?");
@@ -255,6 +291,8 @@ function getId($name) {
     $req->closeCursor();
 
 }
+
+// retourne le nom à partir de l'id
 function getName($id) {
     require('db.php');
     $req = $bdd->prepare("SELECT id, pseudo,email FROM user WHERE id= ?");
@@ -269,6 +307,8 @@ function getName($id) {
     $req->closeCursor();
 
 }
+
+// Met a jour le nombres articles , operator étant - ou +
 function updateNbArticles($id, $operator) {
     require('db.php');
     $req = $bdd->prepare("SELECT nbArticles FROM user where id = ?");
@@ -305,7 +345,7 @@ function deleteUser($id) {
     $req->execute(array($id));
     $req->closeCursor();
 }
-
+// retoure les articles avec comme mots $words
 function searchArticles($words) {
     if (!empty($words)) {
         require('db.php');
@@ -431,5 +471,5 @@ function addVues($articleid) {
     $requpdate->closeCursor();
 }
 
-
+    
 ?>

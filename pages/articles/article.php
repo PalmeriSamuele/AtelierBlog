@@ -1,6 +1,7 @@
 <?php 
     require($_SERVER['DOCUMENT_ROOT'].'/php_simple/app/session.php'); 
     require('../../app/fonctions.php');
+    require_once('../../resources/JBBCode/Parser.php');
     $notconnected = 'Vous devez être connecté !';
     $comment = null;
     if(isset($_GET['vue'])) 
@@ -85,11 +86,19 @@
                 <?php } ?>
             </div>
         </div>
-        <div class="container">
-        <?php if(isset($article->imagePath)) { ?>
-            <p class="article-content">  <img class="article-img justify-content-center"src="<?=$article->imagePath?>" alt=""> <?= $article->contenu ?> </p>
+        <div class="container article">
+        <?php   $parser = new JBBCode\Parser();
+                $parser->addCodeDefinitionSet(new JBBCode\DefaultCodeDefinitionSet());
+                        
+                $parser->parse($article->contenu);
+             
+                  
+            if(isset($article->imagePath)) { ?>
+
+            <p class="article-content">  <img class="article-img justify-content-center" src="<?= $article->imagePath ?>" alt=""> <?= $parser->getAsHtml() ?> </p>
             <?php } else { ?>
-                    <p class="article-content"><?= $article->contenu ?> </p>
+
+                    <p class="article-content"><?= $parser->getAsHtml() ?> </p>
 
             <?php } ?>
         </div>

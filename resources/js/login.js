@@ -1,26 +1,24 @@
 
 window.addEventListener("DOMContentLoaded", (event) => {
-    
+    var connect = document.getElementById('connect');
     var connected = document.getElementById('connected2');
     var notconnected = document.getElementById('notconnected');
 
-    console.log(connect.innerHTML);
-    console.log(connected);
-    console.log(notconnected);
 
-    if (document.getElementById('connect').innerHTML.trim() === "se connecter") {
-        console.log('salut');
+    if (connect.innerHTML.trim() === "se connecter") {
 
-        document.getElementById('notconnected').style.display = "inline";
-        document.getElementById('connected2').style.display = "none";
+        notconnected.style.display = "inline";
+        connected.style.display = "none";
 
-    
+
 
     }
 
     else {
-        document.getElementById('connected2').style.display = "inline";
-        document.getElementById('notconnected').style.display = "none";
+        connected.style.display = "inline";
+        notconnected.style.display = "none";
     }
 
 });
+
+
