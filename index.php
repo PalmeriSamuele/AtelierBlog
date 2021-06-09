@@ -52,7 +52,7 @@
                         $rep = false;
                         while($i < count($articles)):
                             if ($articles[$i]->isPinned == 1): ?>
-                                <h2 class="fas fa-star article-item main-titre">Article mit en avant</h2>
+                                <h2 class="article-item main-titre"><i class="fas fa-star"></i>Article mit en avant</h2>
                                 <?php
                                 $rep = true; ?>
                                 <div class="mx-auto mb-3 pinned-article">
@@ -103,8 +103,10 @@
 
 
         <?php endfor; ?>
-        
+       
         </div>
+
+        <hr>
         <h2 class="article-item main-titre  col col-lg-12 col-md-9 col-sm-5 col-5">Top Utilisateurs</h2>
             <div class="top-users col mt-4">
                 
@@ -117,9 +119,9 @@
                     }
                 for ($i=0; $i < $to; $i++ ):
                     if ($i === 0) {?>
-                    <div class="user-card firstuser ">
+                    <div class="card user-card firstuser " >
                     <?php  } else {?>
-                        <div class="user-card col-lg-3 col-md-12 col-sm-12">
+                        <div class="card user-card col-lg-3 col-md-12 col-sm-12" >
                         <?php } ?>
                         <p><?= $users[$i]->pseudo ?></p>
                         <p class="top-user-nb">nombres d'articles écrient</p>

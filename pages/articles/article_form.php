@@ -8,7 +8,10 @@
         if (isset($_SESSION['name'])) {
             $id = getId($_SESSION['name']);
             if (isset($_POST['titre']) and isset($_POST['contenu']) and isset($_SESSION['name']) and checkPermission($id)->role !== null) {
-                if (isset($_FILES['image']['name']))
+                if ($_POST['theme-choice'] === ""){
+                    $_POST['theme-choice'] = 'Sans thème';
+                } 
+                if ($_FILES['image']['name'] !== "")
                     addArticle($_POST['titre'],$_POST['contenu'],$id,$_POST['resume'],$_POST['theme-choice'], "/php_simple/resources/images/articles/" . $_FILES['image']['name'] );
                     
                 else {
@@ -27,7 +30,6 @@
             $path = "../../resources/images/articles/" . $_FILES['image']['name'] ;
             move_uploaded_file($_FILES['image']['tmp_name'],$path);
     }
-
 
 
 ?>
@@ -83,9 +85,15 @@
                         <input list="theme-choices" id="theme-choice" name="theme-choice" />
 
                         <datalist id="theme-choices">
-                            <?php foreach($themes as $theme_): ?>
-                                <option value="<?= $theme_->theme?>">
-                            <?php endforeach;?>
+                        <?php 
+                            foreach ($themes as $theme):
+                                $arrayTheme[] = $theme->theme;
+                            endforeach;
+                            foreach(array_unique($arrayTheme) as $theme): ?>
+                                <option value="<?= $theme?>">
+                        <?php endforeach;?>
+                                
+                        
 
                         </datalist>
                     

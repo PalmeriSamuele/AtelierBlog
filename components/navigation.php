@@ -48,7 +48,7 @@
                     <li>
                         <nav class="navbar navbar-dark bg-dark">
                             <div class="container-fluid">
-                                <form action="/php_simple/pages/users/profil.php?search='<?= $_GET['search']?>" method="GET" class="d-flex">
+                                <form action="/php_simple/components/articles/searchArticles.php?search='<?= $_GET['search']?>" method="GET" class="d-flex">
                                     <input class="form-control me-2" type="search" name="search" id="search" placeholder="Search" aria-label="Search">
                                     <button class="btn btn-outline-success" type="submit">Search</button>
                                 </form>

@@ -45,22 +45,22 @@
     <div class="container">
         <div class="row ">
             <?php require('../../components/articles/orderBy.php');  ?>
-            <?php foreach($articles as $article):  ?>
-
-                <div class="card-article card mx-auto">
-                <?php if (isset($article->imagePath)) {?>
-                            <img class="card-img-top" src="<?= $article->imagePath ?>" alt="Card image cap">
-                            <?php } ?>
-                        <div class="card-body col-lg-5">
-                            <h5 class="card-title"><?= $article->titre ?></h5>
-                            <p class="card-text"><?=$article->résumé ?> </p>
-                            <a href="/php_simple/pages/articles/article.php?id=<?=$article->id?>&vue= <?= $article->id?>" class="btn btn-primary">lire la suite</a>
-                        </div>
-                        
-                </div>
-
-    
-            <?php endforeach; ?>
+            <div class="profil-articles-box">
+                    <?php 
+                    if (isset($articles)) {
+                        foreach($articles as $article): ?>
+                            <div class="card mx-auto mb-3 ">
+                                <div class="card-body">
+                                    <h2 class="card-title "><?= $article->titre ?> </h2>
+                                    <a class="btn btn-primary card-link" href="/php_simple/pages/articles/article.php?id=<?=$article->id?>">lire la suite</a>
+                                </div>
+                            </div>
+                        <?php endforeach;  ?>
+                    <?php }
+                    else {
+                        echo "Vous n'avez pas encore d'articles !";
+                    } ?>
+            </div>
             
         </div>
     </div>

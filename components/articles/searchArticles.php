@@ -26,24 +26,21 @@
         <main role="main">
             <div class="container">
             <?php require('../../components/articles/OrderBy.php');  ?>
-                <div class="row">
-                    
-                    <?php
-                    if (!is_string($articlesSearch)) {
-                        foreach ($articlesSearch as $article): ?>
-                
-                            <div class="col articles">
-                                <div class="card mx-auto mb-3" style="width: 18rem;">
-                            
-                                    <div class="card-body">
-                                    <h2 class="card-title"><?= $article->titre ?> </h2>
-                                    <a class="btn btn-primary" href="/php_simple/pages/articles/article.php?id=<?=$article->id?>">lire la suite</a>
+                <div class="profil-articles-box">
+                    <?php 
+                    if (isset($articlesSearch)) {
+                        foreach($articlesSearch as $article): ?>
+                            <div class="card mx-auto mb-3 ">
+                                <div class="card-body">
+                                    <h2 class="card-title "><?= $article->titre ?> </h2>
+                                    <a class="btn btn-primary card-link" href="/php_simple/pages/articles/article.php?id=<?=$article->id?>">lire la suite</a>
                                 </div>
                             </div>
-                        <?php endforeach; ?> 
-                    <?php } ?>
-
-                    
+                        <?php endforeach;  ?>
+                    <?php }
+                    else {
+                        echo "Vous n'avez pas encore d'articles !";
+                    } ?>
                 </div>
             </div>
         </main>

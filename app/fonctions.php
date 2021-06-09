@@ -420,12 +420,12 @@ function updatePseudo($userid, $newpseudo) {
 }
 
 
-function updatePassword($userid, $newpassword) {
-    require('db.php');  
-    $req = $bdd->prepare("UPDATE user SET password = ? WHERE id = ?");
-    $req->execute(array($newpassword,$userid));
-    $req->closeCursor();
-}
+// function updatePassword($userid, $newpassword) {
+//     require('db.php');  
+//     $req = $bdd->prepare("UPDATE user SET password = ? WHERE id = ?");
+//     $req->execute(array($newpassword,$userid));
+//     $req->closeCursor();
+// }
 
 
 

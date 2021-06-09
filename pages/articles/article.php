@@ -25,6 +25,7 @@
 
         $article = getArticle($id);
         $comments = getComments($id); 
+        $author = getUser($article->authorid);
     }
 
 ?>
@@ -52,6 +53,7 @@
                 <h2 class="article-item titre"> <?= $article->titre ?></h2>
                 <h4 class="article-item resume"> <?= $article->résumé ?></h4>
                 <time class="article-item time"> <?= $article->date ?></time>
+                <p class=" author">Par <?= $author->pseudo ?></p>
                 
         
             </div>

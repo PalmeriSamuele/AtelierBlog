@@ -46,11 +46,11 @@
         header("Location: /php_simple/pages/users/logout.php?succes=Votre pseudo a été changé en " . $_POST['modpseudo'] . ", veuillez vous reconnecter");
         
     }
-    if (isset($_POST['modpassword'])) {
-        $userid = getId($_SESSION['name']);
-        updatePassword($userid,$_POST['modpassword']);
-        header("Location: /php_simple/pages/users/logout.php?succes=Votre mot de passe a été changé en " . $_POST['modpassword']. ", veuillez vous reconnecter");
-    }
+    // if (isset($_POST['modpassword'])) {
+    //     $userid = getId($_SESSION['name']);
+    //     updatePassword($userid,$_POST['modpassword']);
+    //     header("Location: /php_simple/pages/users/logout.php?succes=Votre mot de passe a été changé en " . $_POST['modpassword']. ", veuillez vous reconnecter");
+    // }
     
     if (isset($_GET['updateuser'])) {
         $updateuser = $_GET['updateuser'];
@@ -101,20 +101,22 @@
     <h2 class="profil-titre">Vos données </h2>
     <div class="mx-auto">
         <div class="profil-perso-data">
-            <p class="label-info-perso">pseudo  <?= $user->pseudo ?> </p> 
+            <p class="label-info-perso">  <?= $user->pseudo ?> </p> 
             <form class="label-info-perso" action="profil.php?userid=<?= getId( $_GET['userid'])?>" method="POST">
                 <input type="text" name="modpseudo" id="modpseudo">
                 <button type="submit">modifier</button>
             </form>
         </div>
-        <div class="profil-perso-data">
-            <p class="label-info-perso">password  <?= $user->password ?> </p> 
-            <form action="profil.php?userid=<?= getId($_GET['userid'])?>" method="POST">
+        <!-- <div class="profil-perso-data">
+            <p class="label-info-perso">password</?= $user->password ?> </p> 
+            <form action="profil.php?userid=<//?= getId($_GET['userid'])?>" method="POST">
                 <input type="text" name="modpassword" id="modpassword">
                 <button type="submit">modifier</button>
             </form>
-        </div>
+        </div> -->
     </div>
+
+    <hr>
     <h2 class="profil-titre">Vos articles</h2>
     
     <div class="profil-articles-box">
@@ -125,7 +127,7 @@
                 <div class="card mx-auto mb-3 ">
                     <div class="card-body">
                         <h2 class="card-title "><?= $article->titre ?> </h2>
-                        <a class="btn btn-primary" href="/php_simple/pages/articles/article.php?id=<?=$article->id?>">lire la suite</a>
+                        <a class="btn btn-primary card-link" href="/php_simple/pages/articles/article.php?id=<?=$article->id?>">lire la suite</a>
                     </div>
                 </div>
             <?php endforeach;  ?>
@@ -134,7 +136,7 @@
             echo "Vous n'avez pas encore d'articles !";
         } ?>
     </div>
-
+    <hr>
 <?php if (checkPermission(getId($_SESSION['name']))->role == 1) { ?>
     <h2 class="profil-titre"> Utilisateurs </h2>
 
@@ -193,7 +195,7 @@
                 <div class="card mx-auto mb-3 ">
                     <div class="card-body">
                         <h2 class="card-title "><?= $article->titre ?> </h2>
-                        <a class="btn btn-primary" href="/php_simple/pages/articles/article.php?id=<?=$article->id?>">lire la suite</a>
+                        <a class="btn btn-primary card-link" href="/php_simple/pages/articles/article.php?id=<?=$article->id?>">lire la suite</a>
                         <a href="profil.php?articleid=<?= $article->id ?>" class="far fa-star" id="pinneLink" onclick="changeClassDePinne()" > 
                         <?php
 
