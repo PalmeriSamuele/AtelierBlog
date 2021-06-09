@@ -5,6 +5,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     var notconnected = document.getElementById('notconnected');
 
 
+
     if (connect.innerHTML.trim() === "se connecter") {
 
         notconnected.style.display = "inline";
@@ -19,6 +20,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
         notconnected.style.display = "none";
     }
 
-});
 
+});
 

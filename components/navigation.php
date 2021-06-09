@@ -4,11 +4,11 @@
     //     $html = new simple_html_dom();
     //     $html->load_file("http://127.0.0.1");
     //     echo $html->find('#body2')->className;
-        //$html->find("body");
-         //$changetheme = $dom->getElementByID("body2");
-        //  var_dump($dom);
-        //  var_dump($dom->body);
-     //}
+    //     $html->find("body");
+    //      $changetheme = $dom->getElementByID("body2");
+    //      var_dump($dom);
+    //      var_dump($dom->body);
+    //  }
 ?>
 <header>
     

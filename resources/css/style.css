@@ -7,9 +7,8 @@
 html {
     font-size: 62,5%;
 }
-main {
-    min-height: 78vh;
-}
+
+
 
 
 body.dark {
@@ -17,18 +16,19 @@ body.dark {
     color: white;
 }
 
-.card-text, .card-title {
-    width: 250px;
+.card-text, .card-title{
+    width: 300px;
     overflow: hidden;
     text-overflow: ellipsis; 
 } 
 .card-article {
     margin: 1em;
-    height: fit-content;
-    max-width: 700px;
+    max-height: 320px;
+    max-width: 500px;
     display: flex;
     flex-direction: row;
 }
+
 .card-article-img {
     width: 100px;
     height: 100px;
@@ -36,11 +36,16 @@ body.dark {
 }
 .card-img-top {
     height:  200px;
-    width: 230px;
+    width: 250px;
 }
 .card {
     margin: 1rem;
 }
+.card-body {
+    max-width: 300px;
+    max-height: fit-content;
+}
+
 
 
 
@@ -49,6 +54,7 @@ body.dark {
     grid-template-columns:  1fr 1fr 1fr 1fr;
 
 }
+
 
 
 .pinned-article {
@@ -65,7 +71,9 @@ body.dark {
 
 }
 
-
+.main-article-title {
+    font-size: 1.5rem;
+}
 .main-container {
     width: 800px;
 }
@@ -129,6 +137,12 @@ body.dark {
 
 .users > .user {
     margin-bottom : 1em;
+}
+
+
+.list-users {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .fade {
@@ -220,10 +234,12 @@ footer {
 
 .profil-user {
 
-    width: 400px;
+    max-width: 300px;
     padding: 10px;
     
 }
+
+
 
 .profil-user-info {
     display: flex;
@@ -307,10 +323,23 @@ footer {
     .card-img-top {
         display: none;
     }
-    .main-bloc {
+    .main-bloc , .profil-articles-box{
         display: flex;
         flex-direction: column;
+    }
+    .navbar-brand {
+        text-align: center;
     }
 }
 
 
+@media screen and (max-width: 1200px) {
+    .main-bloc , .profil-articles-box{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-article {
+        height: fit-content;
+    }
+}

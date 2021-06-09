@@ -90,15 +90,14 @@
         <?php for($i=0 ; $i < $to ;$i++):  ?>
 
             <div class="card-article card mx-auto ">
-            <?php if (isset($articles[$i]->imagePath)) {?>
+         
+                <div class="card-body">
                         <img class="card-img-top" src="<?= $articles[$i]->imagePath ?>" alt="Card image cap">
-                        <?php } ?>
-                    <div class="card-body">
                         <h5 class="card-title"><?= $articles[$i]->titre ?></h5>
-                        <p class="card-text"><?=$articles[$i]->résumé ?> </p>
                         <a href="/php_simple/pages/articles/article.php?id=<?=$articles[$i]->id?>&vue= <?= $articles[$i]->id?>" class="btn btn-primary">lire la suite</a>
+                        
                     </div>
-                    
+                   
             </div>
 
 

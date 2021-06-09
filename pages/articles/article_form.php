@@ -15,7 +15,7 @@
                     addArticle($_POST['titre'],$_POST['contenu'],$id,$_POST['resume'],$_POST['theme-choice'], "/php_simple/resources/images/articles/" . $_FILES['image']['name'] );
                     
                 else {
-                    addArticle($_POST['titre'],$_POST['contenu'],$id,$_POST['resume'],$_POST['theme-choice']);
+                    addArticle($_POST['titre'],$_POST['contenu'],$id,$_POST['resume'],$_POST['theme-choice'], "/php_simple/resources/images/articles/no-img.png");
                 }
                 updateNbArticles($id,"");   // on update le nb articles dans la bdd +1
                 $msuccess = "Article enregistré";

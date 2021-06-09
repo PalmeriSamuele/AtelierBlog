@@ -2,7 +2,7 @@
     require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/app/session.php'); 
     require_once('../../app/fonctions.php');
     
-
+    $artPinned = getPinned();
     if (isset($_GET['orderby'])) {
         $orderby = $_GET['orderby'];
         if ($orderby === "ABC") {
@@ -41,29 +41,10 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/navigation.php') ?>
 
 <main role="main">
-
-    <div class="container">
-        <div class="row ">
-            <?php require('../../components/articles/orderBy.php');  ?>
-            <div class="profil-articles-box">
-                    <?php 
-                    if (isset($articles)) {
-                        foreach($articles as $article): ?>
-                            <div class="card mx-auto mb-3 ">
-                                <div class="card-body">
-                                    <h2 class="card-title "><?= $article->titre ?> </h2>
-                                    <a class="btn btn-primary card-link" href="/php_simple/pages/articles/article.php?id=<?=$article->id?>">lire la suite</a>
-                                </div>
-                            </div>
-                        <?php endforeach;  ?>
-                    <?php }
-                    else {
-                        echo "Vous n'avez pas encore d'articles !";
-                    } ?>
-            </div>
-            
-        </div>
-    </div>
+    <?php 
+        require('../../components/articles/OrderBy.php');
+        $_SESSION['articles'] = $articles;
+        require_once("../../components/articles/articles_components.php"); ?>
 </main>
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/footer.php') ?>

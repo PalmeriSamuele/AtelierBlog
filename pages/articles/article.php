@@ -95,7 +95,7 @@
                 $parser->parse($article->contenu);
              
                   
-            if(isset($article->imagePath)) { ?>
+            if(isset($article->imagePath) && $article->imagePath != "/php_simple/resources/images/articles/no-img.png") { ?>
 
             <p class="article-content">  <img class="article-img justify-content-center" src="<?= $article->imagePath ?>" alt=""> <?= $parser->getAsHtml() ?> </p>
             <?php } else { ?>
