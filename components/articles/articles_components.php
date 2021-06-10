@@ -1,6 +1,5 @@
 <?php 
 
-$nbArticleVue  = 4;
 if (isset($_SESSION['articles'])){
     $articles = $_SESSION['articles'];
 }
@@ -12,7 +11,7 @@ if (isset($_SESSION['articles'])){
 <div class="container">
         <div class="profil-articles-box">
             <?php 
-            if (isset($articles)) { 
+            if (isset($articles) && !empty($articles)) { 
                 foreach($articles as $article): ?>
                     <div class="card mx-auto card-article ">
                         <div class="card-body">
@@ -23,7 +22,7 @@ if (isset($_SESSION['articles'])){
                                 <?php  
                                 if (isset($_SESSION['name'])) {
                                     if (checkPermission(getId($_SESSION['name']))->role == 1) { ?>
-                                        <a href="../users/profil.php?articleid=<?= $article->id ?>" class="btn ariticle-pinne" id="pinneLink"  > 
+                                        <a href="../users/profil.php?articleid=<?= $article->id ?>" class="btn article-pinne-btn" id="pinneLink"  > 
                                         <i class="far fa-star red"></i>
                                             <?php
                                             
@@ -61,7 +60,3 @@ if (isset($_SESSION['articles'])){
             } ?>
         </div>
 </div>
-<!-- <?php if (count($articles) > $nbArticleVue) { ?>
-   <a href="articles_components.php">Affricher plus</a>
-
-<?php } ?> -->

@@ -126,5 +126,6 @@
             <?php endforeach;  ?>
             
     </body> 
-    
+    <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/footer.php') ?>
+
 </html>

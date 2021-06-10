@@ -105,7 +105,7 @@
                 <p class="label-info-perso">  <?= $user->pseudo ?> </p> 
                 <form class="label-info-perso" action="profil.php?userid=<?= getId( $_GET['userid'])?>" method="POST">
                     <input type="text" name="modpseudo" id="modpseudo">
-                    <button type="submit">modifier</button>
+                    <button class="btn article-btn" type="submit">modifier</button>
                 </form>
             </div>
             <!-- <div class="profil-perso-data">

@@ -33,15 +33,14 @@ body {
 }
 
 .card-text, .card-title{
-    width: 300px;
+    width: fit-content;
     overflow: hidden;
     text-overflow: ellipsis; 
     color: var(--article-text-color);
 } 
 .card-article {
     max-width: 500px;
-    max-height: 330px;
-    height: 350px;
+    height: 320px;
     display: flex;
     flex-direction: row;
     margin: 10px;
@@ -178,7 +177,7 @@ footer {
     color: white;
     position: relative;
     bottom: 0;
-    margin-top: 200px;
+    margin-top: 400px;
 }
 
 .copy {
@@ -224,9 +223,10 @@ footer {
 
 .article-content{
     text-align: justify;
-    color: lightgray;
+    color: var(--article-content);
 }
-.ariticle-pinne-btn:hover {
+
+.article-pinne-btn:hover {
     background-color: lightgray;
 }
 

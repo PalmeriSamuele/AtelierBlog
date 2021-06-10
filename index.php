@@ -92,11 +92,12 @@
             <div class="card-article card mx-auto ">
          
                 <div class="card-body">
-                        <img class="card-img-top" src="<?= $articles[$i]->imagePath ?>" alt="Card image cap">
+                    <img class="card-img-top" src="<?= $articles[$i]->imagePath ?>" alt="Card image cap">   
+                    <div class="info-bottom">
                         <h5 class="card-title"><?= $articles[$i]->titre ?></h5>
                         <a href="/php_simple/pages/articles/article.php?id=<?=$articles[$i]->id?>&vue= <?= $articles[$i]->id?>" class="btn article-btn">lire la suite</a>
-                        
-                    </div>
+                    </div>          
+                </div>
                    
             </div>
 

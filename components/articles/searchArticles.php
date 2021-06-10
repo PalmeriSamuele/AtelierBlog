@@ -32,9 +32,10 @@
             require_once("articles_components.php"); ?>
         </main>
 
-        <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/footer.php') ?>
 
         </body>
+        <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/footer.php') ?>
+
     </html>
 
 
