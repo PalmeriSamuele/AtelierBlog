@@ -73,7 +73,7 @@
                     <input type="text" name="version" value="{{version_iso}}" class="d-none" />
                     <input type="text" name="image_extension" value="{{image_extension}}" class="d-none" />
                     <div class="form-group">
-                        <label for="title">Titre*</label>
+                        <label class="form-text" for="title">Titre*</label>
                         <input type="text" name="titre" minlength="3" maxlength="100" value="" class="form-control <?php echo (isset($errors['title']) ? 'is-invalid' : '') ?>" id="title" placeholder="Titre" aria-describedby="validation-title" required>
                         <div id="validation-title" class="invalid-feedback">
                             <?php echo (isset($errors['title']) ? $errors['title'] : '') ?>
@@ -81,10 +81,10 @@
                     </div>
 
                     <div class="form-group mt-3">
-                    <label for="theme-choice">Choisis le thème de ton article</label>
+                    <label class="form-text" for="theme-choice">Choisis le thème de ton article</label>
                         <input list="theme-choices" id="theme-choice" name="theme-choice" />
 
-                        <datalist id="theme-choices">
+                        <datalist  id="theme-choices">
                         <?php 
                             foreach ($themes as $theme):
                                 $arrayTheme[] = $theme->theme;
@@ -100,12 +100,12 @@
                     </div>
                     
                     <div class="form-group mt-3">
-                        <label for="excerpt">Résumé de l'article</label>
+                        <label class="form-text" for="excerpt">Résumé de l'article</label>
                         <input type="text" name="resume" value="" class="form-control" id="resume" placeholder="Résumé" aria-describedby="validation-excerpt">
                         <div id="validation-excerpt" class="invalid-feedback"></div>
                     </div>
                      <div class="form-group mt-3">
-                        <label for="excerpt">Image de l'article</label>
+                        <label class="form-text" for="excerpt">Image de l'article</label>
                         <div class="d-flex">
                             <div class="flex-grow-1">
                                 <input type="file" id="image" name="image" class="form-control" accept="image/png, image/jpeg, image/jpg, image/gif" aria-describedby="validation-image">
@@ -120,12 +120,12 @@
                         </div>
                     </div> 
                     <div class="form-group mt-3">
-                        <label for="body">Contenu*</label>
+                        <label class="form-text" for="body">Contenu*</label>
                         <textarea class="form-control" id="textarea" name="contenu" rows="20"  aria-describedby="validation-body" required></textarea>
 
                         <div id="validation-body" class="invalid-feedback"></div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Publier</button>
+                    <button type="submit" class="btn pinned-btn mt-3">Publier</button>
                 </form>
             </div>
         </div>

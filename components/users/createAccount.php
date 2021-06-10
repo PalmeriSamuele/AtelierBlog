@@ -46,8 +46,11 @@
             </div>
         </form>
 
-    </main>
+        
     <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/footer.php') ?>
+
+    </main>
+
  </body>
  </html>
  

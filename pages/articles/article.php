@@ -53,7 +53,7 @@
                 <h2 class="article-item titre"> <?= $article->titre ?></h2>
                 <h4 class="article-item resume"> <?= $article->résumé ?></h4>
                 <time class="article-item time"> <?= $article->date ?></time>
-                <p class=" author">Par <?= $author->pseudo ?></p>
+                <p class=" article-item author">Par <?= $author->pseudo ?></p>
                 
         
             </div>
@@ -100,7 +100,7 @@
             <p class="article-content">  <img class="article-img justify-content-center" src="<?= $article->imagePath ?>" alt=""> <?= $parser->getAsHtml() ?> </p>
             <?php } else { ?>
 
-                    <p class="article-content"><?= $parser->getAsHtml() ?> </p>
+                    <p class="article-content article-item"><?= $parser->getAsHtml() ?> </p>
 
             <?php } ?>
         </div>
@@ -115,17 +115,16 @@
 
             <?php foreach(array_reverse($comments) as $comment): ?>
                 <div class="comment-article container">
-                    <div class="info_comment">
+                    <div class="info-comment">
                         <h3><?= getName($comment->authorid)->pseudo ?></h3>
                         <a href="/php_simple/components/articles/deleteComment.php?id=<?= $comment->id ?>&articleid=<?= $id?>&authorid=<?=$comment->authorid?>" class="fas fa-trash-alt"></i> </a>
                     </div>  
-                    <time> <?= $comment->date ?></time>
+                    <time class="info-comment"> <?= $comment->date ?></time>
                     <p class="comment-content"><?= $comment->contenu ?></p>
                     
                 </div>
             <?php endforeach;  ?>
-  
-        <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/footer.php') ?>
+            
     </body> 
     
 </html>

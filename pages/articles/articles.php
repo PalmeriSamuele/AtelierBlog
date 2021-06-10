@@ -44,10 +44,11 @@
     <?php 
         require('../../components/articles/OrderBy.php');
         $_SESSION['articles'] = $articles;
-        require_once("../../components/articles/articles_components.php"); ?>
+        require_once("../../components/articles/articles_components.php"); 
+        require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/footer.php') ?>
+
 </main>
 
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/footer.php') ?>
 
 </body>
 </html>

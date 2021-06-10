@@ -6,6 +6,9 @@
 <link href="/php_simple/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="/php_simple/resources/css/style.css" rel="stylesheet">
 
+<link id="change-theme" rel="stylesheet" href="/php_simple/resources/css/light-theme.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="/php_simple/resources/css/wbbtheme.css">
 <script src="https://kit.fontawesome.com/45e38e596f.js" crossorigin="anonymous"></script>
 <script src="/php_simple/resources/js/bootstrap.bundle.min.js"></script>
@@ -16,12 +19,3 @@
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
 
-<script>
-
-    $(function() {
-        var options = {
-            buttons : "Bold,Italic,Underline"
-        }
-        $("#textarea").wysibb(options);
-    })
-</script>

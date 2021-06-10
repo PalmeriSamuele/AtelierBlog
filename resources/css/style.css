@@ -6,27 +6,45 @@
 
 html {
     font-size: 62,5%;
+    font-family: 'Noto Sans JP', sans-serif;
+    
 }
 
+main {
+    position: relative;
+}
 
+body {
+    background-color: var(--background-color);
+    color: #292C35;
+}
+.red {
+    color: var(--red);
+}
 
+.articles-link {
+    background-color: var(--background-color);
+}
 
-body.dark {
-    background-color: #292C35;
-    color: white;
+.navbar-brand {
+    color: var(--red);
+    font-size: 1.9rem;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
 .card-text, .card-title{
     width: 300px;
     overflow: hidden;
     text-overflow: ellipsis; 
+    color: var(--article-text-color);
 } 
 .card-article {
-    margin: 1em;
-    max-height: 320px;
     max-width: 500px;
+    max-height: 330px;
+    height: 350px;
     display: flex;
     flex-direction: row;
+    margin: 10px;
 }
 
 .card-article-img {
@@ -37,16 +55,19 @@ body.dark {
 .card-img-top {
     height:  200px;
     width: 250px;
+    margin-left: 10px;
 }
-.card {
-    margin: 1rem;
-}
+
 .card-body {
-    max-width: 300px;
-    max-height: fit-content;
+    max-width: 320px;
+    background-color: var(--article-color);
+    position: relative;
 }
 
-
+.info-bottom {
+    position: absolute;
+    bottom: 0;
+}
 
 
 .profil-articles-box{
@@ -75,7 +96,9 @@ body.dark {
     font-size: 1.5rem;
 }
 .main-container {
-    width: 800px;
+    width: 850px;
+    background-color: var(--inside-page-color);
+    border-radius: 6px;
 }
 
 .main-image {
@@ -100,6 +123,7 @@ body.dark {
 
 .main-titre {
     font-size: 1.7rem;
+    color: var(--text-color);
 }
 .article-image.preview {
     height: 150px !important;
@@ -114,15 +138,7 @@ body.dark {
  * USERS
  */
 
-.top-users {
-    display: flex;
-    justify-content: space-between
-}
 
-.top-user-nb {
-    font-size: 1rem;
-
-}
 .user-avatar {
     height: 2.5rem;
 }
@@ -139,10 +155,16 @@ body.dark {
     margin-bottom : 1em;
 }
 
+.login-dropdown{
+    background-color: var(--red);
+
+}
+
 
 .list-users {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 20px;
 }
 
 .fade {
@@ -150,23 +172,33 @@ body.dark {
 }
 
 footer {
-    background-color: #22223b ;
+    background-color : var( --nav-color) ;
     height: 100px;
     align-content: center;
     color: white;
-
+    position: relative;
+    bottom: 0;
+    margin-top: 200px;
 }
 
 .copy {
     margin-top: 40px;
 }
-
+.white {
+    background-color: white;
+}
 .theme {
-    color:black;
+    text-decoration: underline var(--red);
+    color: var(--red);
 }
 
+
+.form-text {
+    color: var(--text-color);
+}
 .article-item {
     text-align: center;
+    color: var(--text-color);
 }
 .article {
     display: flex;
@@ -192,11 +224,15 @@ footer {
 
 .article-content{
     text-align: justify;
+    color: lightgray;
+}
+.ariticle-pinne-btn:hover {
+    background-color: lightgray;
 }
 
-.info-article {
-    background-color: #ddbea9;
-    margin-bottom: 30px;
+
+.nav-links {
+    margin-right: 30px;
 }
 
 .comment-article {
@@ -213,7 +249,7 @@ footer {
     width: 600px;
 
 }
-.info_comment {
+.info-comment {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
@@ -223,6 +259,7 @@ footer {
 .comment-content {
     font-size: 1.7rem;
     text-align: justify;
+    color: var(--text-color);
 
 }
 
@@ -232,6 +269,10 @@ footer {
     display: flex;
 }
 
+.profil-titre {
+    color: var(--text-color);
+}
+
 .profil-user {
 
     max-width: 300px;
@@ -239,7 +280,31 @@ footer {
     
 }
 
+.article-btn {
+    border: 1px solid lightgray;
+    color: var(--text-color);
+    background-color: var(--nav-color);
+    font-family: 'Noto Sans JP', sans-serif;
+}
 
+.search-btn {
+    background-color: var(--red);
+    color: var(--text-color);
+}
+.article-btn:hover {
+    background-color: var(--red);
+    color: var(--article-text-color);
+}
+.pinned-btn {
+    background-color: var(--red);
+    color: var(--text-color);
+}
+
+
+
+.pinned-btn:hover {
+    color: var(--article-text-color);
+}
 
 .profil-user-info {
     display: flex;
@@ -247,13 +312,24 @@ footer {
 }
 .label-info-perso {
     margin: 10px;
+    color: var(--text-color)
 }
 .nav-link {
-    color: #264653;
+    color: var(--text-color);
+
+}
+.nav-link:hover{
+    color: var(--red);
+
+}
+
+.navbar-brand:hover {
+    color: white;
 }
 .navigation {
 
-    background-color: #fae1dd;
+    background-color: var( --nav-color);
+    height: 100px ;
 }
 .toggle {
     border: 1px solid black;
@@ -264,6 +340,7 @@ footer {
 }
 .theme-bubble {
     width: 100px;
+    
 }
 .light {
     background-color: #e2cfc4 ;
@@ -289,6 +366,30 @@ footer {
     color: white;
 }
 
+.user-card  {
+    background-color:  var(--article-color);
+    border-radius: 10px ;
+
+}
+.top-users-pseudo, .top-users-nbvue {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.top-users {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.top-user-nb {
+    font-size: 0.8rem;
+    
+}
+
+.top-users-nbvue {
+    color: var(--red);
+}
 
 
 @media screen and (max-width: 900px) {
@@ -301,6 +402,10 @@ footer {
     .comment-article,.article-from-comment , .card-article, .pinned-article , .main-container, .main-bloc{
         width: auto;
     }
+
+    .pinned-article-titre, .top-users {
+        color: var(--article-text-color);
+    }
     .card-article {
         max-width: 600px;
     }
@@ -308,11 +413,17 @@ footer {
         display: inline;
         text-align: center;
     }
+
+    .top-users-pseudo, .top-users-nbvue {
+        font-size: 1.3rem;
+    }
+
     .user-card {
         max-width: 18rem;
         margin-top: 20px;
         margin-left: auto;
         margin-right: auto;
+        color: var(--article-text-color);
     }
 
     .pinned-article {
@@ -320,15 +431,19 @@ footer {
         margin-right: auto;
     }
 
+
     .card-img-top {
         display: none;
     }
+
+
     .main-bloc , .profil-articles-box{
         display: flex;
         flex-direction: column;
     }
     .navbar-brand {
         text-align: center;
+       
     }
 }
 
@@ -341,5 +456,9 @@ footer {
 
     .card-article {
         height: fit-content;
+    }
+
+    .top-users-pseudo, .top-users-nbvue {
+        font-size: 1.5rem;
     }
 }

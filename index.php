@@ -52,15 +52,15 @@
                         $rep = false;
                         while($i < count($articles)):
                             if ($articles[$i]->isPinned == 1): ?>
-                                <h2 class="article-item main-titre"><i class="fas fa-star"></i>Article mit en avant</h2>
+                                <h2 class="article-item main-titre "><i class="fas fa-star red"></i>Article mit en avant</h2>
                                 <?php
                                 $rep = true; ?>
-                                <div class="mx-auto mb-3 pinned-article">
+                                <div class=" card mx-auto mb-3 pinned-article">
                                     
                                     <div class="card-body">
                                     
-                                        <h2><?= $articles[$i]->titre ?> </h2>
-                                        <a class="btn btn-success" href="/php_simple/pages/articles/article.php?id=<?=$articles[$i]->id?>">lire la suite</a>
+                                        <h2 class="pinned-article-titre"><?= $articles[$i]->titre ?> </h2>
+                                        <a class="btn pinned-btn" href="/php_simple/pages/articles/article.php?id=<?=$articles[$i]->id?>">lire la suite</a>
                                     
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                 <div class="card-body">
                         <img class="card-img-top" src="<?= $articles[$i]->imagePath ?>" alt="Card image cap">
                         <h5 class="card-title"><?= $articles[$i]->titre ?></h5>
-                        <a href="/php_simple/pages/articles/article.php?id=<?=$articles[$i]->id?>&vue= <?= $articles[$i]->id?>" class="btn btn-primary">lire la suite</a>
+                        <a href="/php_simple/pages/articles/article.php?id=<?=$articles[$i]->id?>&vue= <?= $articles[$i]->id?>" class="btn article-btn">lire la suite</a>
                         
                     </div>
                    
@@ -118,13 +118,13 @@
                     }
                 for ($i=0; $i < $to; $i++ ):
                     if ($i === 0) {?>
-                    <div class="card user-card firstuser " >
+                    <div class=" card user-card firstuser " >
                     <?php  } else {?>
-                        <div class="card user-card col-lg-3 col-md-12 col-sm-12" >
+                        <div class="card user-card" >
                         <?php } ?>
-                        <p><?= $users[$i]->pseudo ?></p>
+                        <p class="top-users-pseudo" ><?= $users[$i]->pseudo ?></p>
                         <p class="top-user-nb">nombres d'articles écrient</p>
-                        <p><?= $users[$i]->nbArticles ?></p>
+                        <p class="top-users-nbvue" ><?= $users[$i]->nbArticles ?></p>
                         </div>
                 <?php endfor; ?>
             </div>

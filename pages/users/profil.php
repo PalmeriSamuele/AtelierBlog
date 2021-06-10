@@ -130,14 +130,14 @@
     <?php if (checkPermission(getId($_SESSION['name']))->role == 1) { ?>
         <h2 class="profil-titre"> Utilisateurs </h2>
 
-        <nav class="navbar navbar-dark bg-dark">
+        <nav class="navbar navbar-dark ">
             <div class="container-fluid">
                 <form action="/php_simple/pages/users/profil.php?userid=<?= getId($_SESSION['name'])?>" method="POST" class="d-flex">
                     <input class="form-control me-2" type="search" name="searchuser" id="searchuser" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <button class="btn search-btn" type="submit">Search</button>
                 </form>
             </div>
-        </nav>
+     
 
             <div class="container list-users">
                 <?php
@@ -155,7 +155,7 @@
                                 <label for="aurteur">auteur</label>
                                 <input type="radio" name="changerole" value="visiteur" id="visiteur" class="changemode">
                                 <label for="visiteur">visiteur</label>
-                                <button type="submit">modifier</button>
+                                <button class="btn article-btn" type="submit">modifier</button>
                             </form>
                         </div>
                     <?php endfor; 
@@ -167,19 +167,9 @@
                 <?php } ?>
             
             </div>
-        
-
-
-        <hr>
-
-        <h2 class="profil-titre">Tous les articles</h2>
-
-        <?php 
-            require('../../components/articles/OrderBy.php');
-            $_SESSION['articles'] = $articles;
-            require("../../components/articles/articles_components.php"); 
-        
-        ?>
+  
     <?php } ?>
+
+    <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/footer.php') ?>
     </body>
 </html>

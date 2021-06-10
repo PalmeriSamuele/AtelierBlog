@@ -5,7 +5,7 @@
     $success = null;
 
     if (isset($_POST['login'])) {
-        header('Location: /php_simple/index.php');
+
         $name = $_POST['email'];
         $mdp = $_POST['password'];
         if (!isset($name) or empty($name)) {
@@ -47,8 +47,6 @@
 
 
 
-<li>
-
     
     <?php if (isset($errors))  { ?>
         <div class="alert alert-danger" > 
@@ -63,7 +61,7 @@
 
     <div class="dropdown">
    
-        <a  class=" btn btn-secondary dropdown-toggle me-5" href="#" role="button" id="connect" data-bs-toggle="dropdown" aria-expanded="false">
+        <a  class="btn pinned-btn dropdown-toggle me-5" href="#" role="button" id="connect" data-bs-toggle="dropdown" aria-expanded="false">
 
                          <?php  
 
