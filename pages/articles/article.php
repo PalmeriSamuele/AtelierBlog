@@ -51,7 +51,6 @@
             <div class="container-fluid">
                 <h1 class="theme"><?= $article->theme ?></h1>
                 <h2 class="article-item titre"> <?= $article->titre ?></h2>
-                <h4 class="article-item resume"> <?= $article->résumé ?></h4>
                 <time class="article-item time"> <?= $article->date ?></time>
                 <p class=" article-item author">Par <?= $author->pseudo ?></p>
                 
@@ -70,16 +69,20 @@
                     }
                 }
                 ?>
-                <a class="article-like far fa-thumbs-up" href="/php_simple/components/articles/updateLikes.php?articleid=<?=$article->id?>&userid=<?=getId($_SESSION['name'])?>&operationlike=<?=$operationlike?>" >
+                <a class="article-like like" href="/php_simple/components/articles/updateLikes.php?articleid=<?=$article->id?>&userid=<?=getId($_SESSION['name'])?>&operationlike=<?=$operationlike?>" >
+
                 <?php
+                
                 if (isset($_SESSION['name'])) {
-                    if (hasLikesBy($article->id,getId($_SESSION['name']))) {
-                        $operationlike = '0';
+                    if (hasLikesBy($article->id,getId($_SESSION['name']))) { ?>
+                        <i class="far fa-thumbs-up red "></i>
+                        <?php $operationlike = '0';
                         echo "J'aime pas";
                         
                     }
-                    else {
-                        $operationlike = '1';
+                    else { ?>
+                        <i class="far fa-thumbs-up "></i>
+                        <?php $operationlike = '1';
                         echo "J'aime";
                         
                     }
@@ -92,12 +95,12 @@
         <?php   $parser = new JBBCode\Parser();
                 $parser->addCodeDefinitionSet(new JBBCode\DefaultCodeDefinitionSet());
                         
-                $parser->parse($article->contenu);
+                $parser->parse($article->contenu);?>
              
-                  
-            if(isset($article->imagePath) && $article->imagePath != "/php_simple/resources/images/articles/no-img.png") { ?>
-
-            <p class="article-content">  <img class="article-img justify-content-center" src="<?= $article->imagePath ?>" alt=""> <?= $parser->getAsHtml() ?> </p>
+                <p class=" article-content resume"> <?= $article->résumé ?></p>
+            <?php if(isset($article->imagePath) && $article->imagePath != "/php_simple/resources/images/articles/no-img.png") { ?>
+                <img class="article-img mx-auto justify-content-center" src="<?= $article->imagePath ?>" alt="image de l'article">
+                <p class="article-content">  <?= $parser->getAsHtml() ?> </p>
             <?php } else { ?>
 
                     <p class="article-content article-item"><?= $parser->getAsHtml() ?> </p>
@@ -109,7 +112,7 @@
 
             <form action="article.php?id=<?=$article->id?>" method="POST" class="article-from-comment article-item mx-auto">
                 <textarea name="comment" placeholder="Laisse un commentaire !"  cols="60" rows="5" required></textarea>
-                <button type="submit" class="btn btn-primary mt-2"> Envoyer</button>
+                <button type="submit" class="btn pinned-btn mt-2"> Envoyer</button>
             </form> 
             </div>
 

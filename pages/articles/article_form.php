@@ -40,7 +40,10 @@
     <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/headers.php') ?>
 
     <script>
-
+        $(function(){
+            var options = {buttons: "bold,italic,underline"}
+            $('#textarea').wysibb(options);
+        })
     </script>
 
     <title>Home blog</title>
@@ -84,7 +87,7 @@
                     <label class="form-text" for="theme-choice">Choisis le thème de ton article</label>
                         <input list="theme-choices" id="theme-choice" name="theme-choice" />
 
-                        <datalist  id="theme-choices">
+                        <datalist class= "input-theme-color" id="theme-choices">
                         <?php 
                             foreach ($themes as $theme):
                                 $arrayTheme[] = $theme->theme;

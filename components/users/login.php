@@ -4,8 +4,11 @@
     $errors = null;
     $success = null;
 
-    if (isset($_POST['login'])) {
 
+    if (isset($_POST['signin'])) {
+        signUp($_POST['pseudo'], $_POST['email'], $_POST['password']);
+    }
+    if (isset($_POST['login']) || isset($_POST['signin'])) {
         $name = $_POST['email'];
         $mdp = $_POST['password'];
         if (!isset($name) or empty($name)) {
@@ -42,7 +45,7 @@
 
     if (isset($_POST['signup']))
         header('Location: /php_simple/components/users/createAccount.php');
-
+    
 ?>
 
 
@@ -61,7 +64,7 @@
 
     <div class="dropdown">
    
-        <a  class="btn pinned-btn dropdown-toggle me-5" href="#" role="button" id="connect" data-bs-toggle="dropdown" aria-expanded="false">
+        <a  class="btn connect-btn dropdown-toggle me-5" href="#" role="button" id="connect" data-bs-toggle="dropdown" aria-expanded="false">
 
                          <?php  
 
@@ -99,15 +102,15 @@
                     </div>
 
                 <div class="form-group mt-2">
-                    <button action="login.php" type="submit" name="login" class="btn btn-primary btn-block">Se connecter</button>
-                    <button action="login.php" type="submit" name="signup" class="btn btn-success btn-block">S'inscrire</button>
+                    <button action="login.php" type="submit" name="login" class="btn pinned-btn login-connect-btn btn-block">Se connecter</button>
+                    <button action="login.php" type="submit" name="signup" class="btn login-create-btn btn-block">S'inscrire</button>
                 </div>
             </form>
         </li>
         <li id="connected2">        
-            <a class="dropdown-item" href="/php_simple/pages/users/profil.php?userid=<?=getId($_SESSION['name'])?>">Mon profil</a>
+            <a class="dropdown-item myspace-btn" href="/php_simple/pages/users/profil.php?userid=<?=getId($_SESSION['name'])?>">Mon profil</a>
             <hr class="dropdown-divider" >
-            <a class="dropdown-item" href="/php_simple/pages/users/logout.php">Déconnexion</a>
+            <a class="dropdown-item logout-btn" href="/php_simple/pages/users/logout.php">Déconnexion</a>
         </li>
  
 

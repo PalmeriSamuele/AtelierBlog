@@ -4,14 +4,15 @@
 window.addEventListener("DOMContentLoaded", (event) => {
 
 
-    if (getCookie("theme") == "dark") {
+    if (getCookie("theme") === "dark") {
         document.getElementById('change-theme').href = '/php_simple/resources/css/dark-mode.css';
-        changeMode.checked = false;
+        document.getElementById('dark-theme').checked = true;
 
     }
     else {
         document.getElementById('change-theme').href = '/php_simple/resources/css/light-mode.css';
-        changeMode.checked= true;
+        document.getElementById('dark-theme').checked = false;
+  
     }
 
 });
@@ -22,14 +23,14 @@ var changeMode = document.getElementById('dark-theme');
 
 changeMode.addEventListener('click', () => {
     if (getCookie("theme") != "dark") {
-        document.getElementById('change-theme').href = '/php_simple/resources/css/dark-mode.css'
-        document.getElementById('checkbox').checked = false;
+        document.getElementById('change-theme').href = '/php_simple/resources/css/dark-mode.css';
+
         document.cookie = "theme=dark ; path=/";
     }
     else {
-        document.getElementById('change-theme').href = '/php_simple/resources/css/light-mode.css'
+        document.getElementById('change-theme').href = '/php_simple/resources/css/light-mode.css';
         document.cookie = "theme=light ; path=/";
-        document.getElementById('checkbox').checked = true;
+
     }
 
 });

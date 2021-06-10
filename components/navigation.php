@@ -42,7 +42,7 @@
                     <li class="nav-links">
                         <div id="dark-theme">
                             <label>
-                                <input id="checkbox" type="checkbox" class="toggle" data-toggle="toggle" data-on="<i class='fas fa-moon red'></i>   " data-off="<i class='fas fa-lightbulb red'></i>   " data-onstyle="dark" data-offstyle="white" > 
+                                <input id="checkbox" type="checkbox" class="toggle" data-toggle="toggle" data-on="<i class='fas fa-moon red'></i>   " data-off="<i class='fas fa-lightbulb red'></i>   " data-onstyle="dark" data-offstyle="light" checked > 
 
                             </label>
                         </div>

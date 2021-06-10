@@ -42,7 +42,7 @@
     <!--                            </label>-->
     <!--                        </div>-->
             <div class="form-group mt-3">
-                <button action="createAccount.php" type="submit" name="signup" class="btn btn-success btn-block">S'inscrire</button>
+                <button action="../../components/users/login.php" type="submit" name="signin" class="btn btn-success btn-block">S'inscrire</button>
             </div>
         </form>
 

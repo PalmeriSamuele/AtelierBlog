@@ -44,6 +44,8 @@ body {
     display: flex;
     flex-direction: row;
     margin: 10px;
+    background-color: var(--article-color);
+
 }
 
 .card-article-img {
@@ -53,14 +55,56 @@ body {
 }
 .card-img-top {
     height:  200px;
-    width: 250px;
-    margin-left: 10px;
+    max-width: 280px;
+    width: fit-content;
+    position: absolute;
+    top:0;
+    left: 0;
+
 }
 
 .card-body {
-    max-width: 320px;
-    background-color: var(--article-color);
+    max-width: 300px;
+    width: 280px;
+    min-height: 200px;
+    height: 200px;
+    min-height: 300px;
     position: relative;
+    
+
+
+}
+.login-create-btn, .login-connect-btn {
+    width: 150px;
+
+}
+
+
+.logout-btn:focus, .myspace-btn:focus {
+    background-color: var(--red);
+}
+
+.login-create-btn:focus {
+    background-color: var(--red);
+}
+.connect-btn {
+
+    border: 1px solid lightgray;
+    color: black;
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: white;
+}
+
+.connect-btn:hover {
+    background-color: var(--red);
+}
+.pinned-body {
+    min-height: 100px;
+    padding: 20px;
+    background-color: var(--article-color);
+
+
+
 }
 
 .info-bottom {
@@ -81,6 +125,7 @@ body {
     max-width: 800px;
     border: 1px solid lightgray;
     border-radius: 4px;
+    position: relative;
 
 }
 .main-bloc  {
@@ -108,6 +153,9 @@ body {
 .article-img-main {
     width: 100%;
 }
+
+
+
 
 .main-articles {
     width: 350px;
@@ -205,8 +253,8 @@ footer {
 }
 
 .article-img {
-    width: 25% ;
-    height: 25%;
+    width: 350px ;
+    height:350px;
     text-align: center;
 }
 
@@ -219,7 +267,21 @@ footer {
 .article-like {
     text-decoration: none;
     margin: 10px;
+
 }
+
+
+.like {
+    text-decoration: none;
+    color: white;
+    text-decoration-style: bold;
+}
+
+.like:hover {
+    color: var(--red);
+    
+}
+
 
 .article-content{
     text-align: justify;
@@ -271,6 +333,11 @@ footer {
 
 .profil-titre {
     color: var(--text-color);
+    text-decoration: underline;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 5px;
+
+    
 }
 
 .profil-user {
@@ -280,7 +347,7 @@ footer {
     
 }
 
-.article-btn {
+.article-btn ,.login-connect-btn , .login-create-btn  {
     border: 1px solid lightgray;
     color: var(--text-color);
     background-color: var(--nav-color);
@@ -295,15 +362,16 @@ footer {
     background-color: var(--red);
     color: var(--article-text-color);
 }
+
 .pinned-btn {
     background-color: var(--red);
-    color: var(--text-color);
+    color: black;
 }
 
 
 
 .pinned-btn:hover {
-    color: var(--article-text-color);
+    color: var(--article-color);
 }
 
 .profil-user-info {
@@ -432,9 +500,7 @@ footer {
     }
 
 
-    .card-img-top {
-        display: none;
-    }
+ 
 
 
     .main-bloc , .profil-articles-box{
@@ -461,4 +527,5 @@ footer {
     .top-users-pseudo, .top-users-nbvue {
         font-size: 1.5rem;
     }
+
 }

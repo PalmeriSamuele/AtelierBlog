@@ -99,7 +99,7 @@
                 </div>
             <?php } ?>
         <?php require_once('../../components/navigation.php') ?>
-        <h2 class="profil-titre">Vos données </h2>
+        <h2 class="profil-titre mx-3">Vos données </h2>
         <div class="mx-auto">
             <div class="profil-perso-data">
                 <p class="label-info-perso">  <?= $user->pseudo ?> </p> 
@@ -118,7 +118,7 @@
         </div>
 
         <hr>
-        <h2 class="profil-titre">Vos articles</h2>
+        <h2 class="profil-titre mx-3">Vos articles</h2>
         
         <?php 
             $_SESSION['articles'] = $userarticles;
@@ -128,7 +128,7 @@
         
         <hr>
     <?php if (checkPermission(getId($_SESSION['name']))->role == 1) { ?>
-        <h2 class="profil-titre"> Utilisateurs </h2>
+        <h2 class="profil-titre mx-3"> Utilisateurs </h2>
 
         <nav class="navbar navbar-dark ">
             <div class="container-fluid">

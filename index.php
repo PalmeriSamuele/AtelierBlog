@@ -57,7 +57,7 @@
                                 $rep = true; ?>
                                 <div class=" card mx-auto mb-3 pinned-article">
                                     
-                                    <div class="card-body">
+                                    <div class="pinned-body">
                                     
                                         <h2 class="pinned-article-titre"><?= $articles[$i]->titre ?> </h2>
                                         <a class="btn pinned-btn" href="/php_simple/pages/articles/article.php?id=<?=$articles[$i]->id?>">lire la suite</a>

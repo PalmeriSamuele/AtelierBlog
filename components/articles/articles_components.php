@@ -23,23 +23,26 @@ if (isset($_SESSION['articles'])){
                                 if (isset($_SESSION['name'])) {
                                     if (checkPermission(getId($_SESSION['name']))->role == 1) { ?>
                                         <a href="../users/profil.php?articleid=<?= $article->id ?>" class="btn article-pinne-btn" id="pinneLink"  > 
-                                        <i class="far fa-star red"></i>
+                                   
                                             <?php
                                             
                                                     if ($artPinned) {
                                                         if ($artPinned->id == $article->id) {
                                                             $valupdate = 0;
+                                                            ?> <i class="fas fa-star red"></i> <?php
                                                             echo 'dépingler';
                                 
 
                                                         }
                                                         else {
+                                                            ?> <i class="far fa-star "></i> <?php
                                                             $valupdate = 1;
                                                             echo 'épingler';
                                                 
                                                         }
                                                     } 
                                                     else {
+                                                        ?> <i class="far fa-star "></i> <?php
                                                         $valupdate = 1;
                                                         echo 'épingler';
                                                     }
@@ -56,7 +59,7 @@ if (isset($_SESSION['articles'])){
                 <?php endforeach;  
                 } 
                 else {
-                echo "il n'y a pas d'articles !";
+                echo "Aucun articles trouvés !";
             } ?>
         </div>
 </div>
