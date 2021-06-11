@@ -1,6 +1,10 @@
 <?php 
     require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/app/session.php'); 
     require_once('../../app/fonctions.php');
+
+    if (!isset($_GET['search'])) {
+        $_GET['search'] = "";
+    }
     $articlesSearch = searchArticles($_GET['search']);
     $artPinned = getPinned();
     if (is_string($articlesSearch)){
@@ -20,11 +24,7 @@
         <body>
 
         <?php require_once('../../components/navigation.php') ?>
-        <?php if (isset($fail)) { ?>
-            <div class="alert alert-danger"> 
-                <?= $fail ?>
-            </div>
-        <?php } ?>
+
         <main role="main">
             
             <?php 

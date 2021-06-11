@@ -1,8 +1,8 @@
 <?php 
-    $articles = getArticles("desc");
+    $articles = getArticles("le plus recent");
     $users = getUsers();  
 
-
+// recupere tout les articles trier par orderby
 function getArticles($orderby)
 {
     $decr = "ORDER BY id DESC";
@@ -11,16 +11,16 @@ function getArticles($orderby)
     $lessVues = "ORDER BY nbVues ASC";
     $abc = "";
     require('db.php');
-    if ($orderby === "desc")
+    if ($orderby === "le plus recent")
         $sql = "SELECT * from article " . $decr;
 
-    else if ($orderby === "asc")
+    else if ($orderby === "le moins recent")
         $sql = "SELECT * from article " . $asc;
 
-    else if ($orderby === "moreVues")
+    else if ($orderby === "plus de vues")
         $sql = "SELECT * from article " . $moreVues;
 
-    else if ($orderby === "lessVues")
+    else if ($orderby === "moins de vues")
         $sql = "SELECT * from article " . $lessVues;
     else 
         $sql = "SELECT * from article ";
@@ -44,7 +44,7 @@ function getArticlesByTheme($theme){
     $req->closeCursor();    
 }
 
-
+// recupere tous les themes existants
 function getThemes(){
     require("db.php");
     $arrayThemes = [];

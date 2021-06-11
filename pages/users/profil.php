@@ -4,14 +4,12 @@
     $users = getUsers();                                                                                                               
     $artPinned = getPinned();
     $userid = null;
-    $nbArticleVue  = 4;
     if (isset($_GET['userid'])) {
         $userid = $_GET['userid'];
         $user = getUser($userid);
     }                                                                                                                                                                            
 
     $userarticles = getArticlesById($userid);
-    $articles = getArticles("");
 
     if (isset($_GET['articleid'])) {
         if (checkPermission(getId($_SESSION['name']))->role == 1) {
@@ -84,8 +82,17 @@
 <html lang="fr">
     <head>
         <?php require_once($_SERVER['DOCUMENT_ROOT'].'/php_simple/components/headers.php') ?>       
-
-        <title>Profile de <?php $_SESSION['name']?></title>
+    <script>
+    function AfficheMdp() {
+        if (document.getElementById('label-password').type == "text") {
+            document.getElementById('label-password').type = 'password';
+        }
+        else {
+            document.getElementById('label-password').type = 'text';
+        }
+    }
+    </script>
+        <title>Profile de <?= $_SESSION['name']?></title>
     </head>
     <body>
             <?php if (isset($succes)) { ?>
@@ -108,13 +115,10 @@
                     <button class="btn article-btn" type="submit">modifier</button>
                 </form>
             </div>
-            <!-- <div class="profil-perso-data">
-                <p class="label-info-perso">password</?= $user->password ?> </p> 
-                <form action="profil.php?userid=<//?= getId($_GET['userid'])?>" method="POST">
-                    <input type="text" name="modpassword" id="modpassword">
-                    <button type="submit">modifier</button>
-                </form>
-            </div> -->
+            <div class="profil-perso-data">
+                <p class="label-info-perso">mot de passse </p><input type="password" id="label-password" value="<?= $user->password ?>" disabled>
+            <button class="btn article-btn" onclick=" AfficheMdp() ">Afficher</button>
+            </div>
         </div>
 
         <hr>
@@ -133,7 +137,7 @@
         <nav class="navbar navbar-dark ">
             <div class="container-fluid">
                 <form action="/php_simple/pages/users/profil.php?userid=<?= getId($_SESSION['name'])?>" method="POST" class="d-flex">
-                    <input class="form-control me-2" type="search" name="searchuser" id="searchuser" placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2" type="search" name="searchuser" id="searchuser" placeholder="Rechercher" aria-label="Search">
                     <button class="btn search-btn" type="submit">Search</button>
                 </form>
             </div>
@@ -148,7 +152,7 @@
                                 <p><?= $users[$i]->pseudo ?></p>
                                 <a href="/php_simple/components/users/deleteUser.php?superid=<?=getId($_SESSION['name'])?>&userid=<?= $users[$i]->id?>" class="fas fa-trash-alt">  </a>
                             </div>
-                            <form action="profil.php?userid=<?= getId($_SESSION['name'])?>&updateuser=<?= $users[$i]->id?>" method="POST">
+                            <form action="profil.php?userid=<?= getId($_SESSION['name'])?>&updateuser=<?= $users[$i]->id?>" method="POST" class="form-changerole">
                                 <input type="radio" name="changerole" value="admin" id="admin" class="changemode">
                                 <label for="admin">admin</label>
                                 <input type="radio" name="changerole" value="auteur" id="auteur" class="changemode">

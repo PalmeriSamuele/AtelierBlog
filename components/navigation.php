@@ -49,12 +49,12 @@
                     </li>
                     <li class="nav-links">
 
-                            <div class="container-fluid">
-                                <form action="/php_simple/components/articles/searchArticles.php?search='<?= $_GET['search']?>" method="GET" class="d-flex">
-                                    <input class="form-control me-2" type="search" name="search" id="search" placeholder="Search" aria-label="Search">
-                                    <button class="btn search-btn" type="submit">Search</button>
-                                </form>
-                            </div>
+                        <div class="container-fluid">
+                            <form action="/php_simple/components/articles/searchArticles.php?search='<?= $_GET['search']?>" method="GET" class="d-flex">
+                                <input class="form-control me-2" type="search" name="search" id="search" placeholder="Rechercher" aria-label="Search">
+                                <button class="btn search-btn" type="submit">Search</button>
+                            </form>
+                        </div>
                     </li>
                     <li class="nav-links">
                         <?php

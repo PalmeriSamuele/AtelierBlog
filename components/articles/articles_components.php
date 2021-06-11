@@ -11,7 +11,7 @@ if (isset($_SESSION['articles'])){
 <div class="container">
         <div class="profil-articles-box">
             <?php 
-            if (isset($articles) && !empty($articles)) { 
+            if (isset($articles) && !is_string($articles)) { 
                 foreach($articles as $article): ?>
                     <div class="card mx-auto card-article ">
                         <div class="card-body">
@@ -30,21 +30,21 @@ if (isset($_SESSION['articles'])){
                                                         if ($artPinned->id == $article->id) {
                                                             $valupdate = 0;
                                                             ?> <i class="fas fa-star red"></i> <?php
-                                                            echo 'dépingler';
+                                                           
                                 
 
                                                         }
                                                         else {
                                                             ?> <i class="far fa-star "></i> <?php
                                                             $valupdate = 1;
-                                                            echo 'épingler';
+                                                           
                                                 
                                                         }
                                                     } 
                                                     else {
                                                         ?> <i class="far fa-star "></i> <?php
                                                         $valupdate = 1;
-                                                        echo 'épingler';
+                                                
                                                     }
                                                 
                                             ?>
@@ -57,9 +57,7 @@ if (isset($_SESSION['articles'])){
                         </div>
                     </div>
                 <?php endforeach;  
-                } 
-                else {
-                echo "Aucun articles trouvés !";
-            } ?>
+                }  ?>
+
         </div>
 </div>

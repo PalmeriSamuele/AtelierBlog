@@ -117,14 +117,13 @@
                             <div class="mt-1 pr-1 flex-grow-1 d-flex justify-content-end">
                                 <div>
                                     <img src="" class="card-img-top d-none article-image preview" alt="article-image">
-                                    <div><i>Image actuelle</i></div>
                                 </div>
                             </div>
                         </div>
                     </div> 
                     <div class="form-group mt-3">
                         <label class="form-text" for="body">Contenu*</label>
-                        <textarea class="form-control" id="textarea" name="contenu" rows="20"  aria-describedby="validation-body" required></textarea>
+                        <textarea class="form-control" id="textarea" name="contenu" rows="10"  aria-describedby="validation-body" required></textarea>
 
                         <div id="validation-body" class="invalid-feedback"></div>
                     </div>

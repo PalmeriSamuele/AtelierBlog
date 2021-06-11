@@ -27,13 +27,13 @@
 
     </button> 
   <div class="dropdown-menu" > 
-        <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "desc"?>">Le plus recents</a>
+        <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "le plus recent"?>">le plus recent</a>
 
-        <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "asc"?>">Le moins recents</a>
+        <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "le moins recent"?>">le moins recent</a>
 
-        <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "moreVues"?>">plus de vues</a>
-        <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "lessVues"?>">moins de vues</a>
-        <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "ABC"?>">A...Z</a>
+        <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "plus de vues"?>">plus de vues</a>
+        <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "moins de vues"?>">moins de vues</a>
+        <a class="dropdown-item" href="/php_simple/pages/articles/articles.php?orderby=<?= "ABC"?>">ABC</a>
         <hr />
         
 

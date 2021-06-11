@@ -6,7 +6,7 @@
     if (isset($_GET['orderby'])) {
         $orderby = $_GET['orderby'];
         if ($orderby === "ABC") {
-            $articles = sortABC(getArticles("abc"));  
+            $articles = sortABC(getArticles("ABC"));  
         }
         else {
             $articles = getArticles($orderby);

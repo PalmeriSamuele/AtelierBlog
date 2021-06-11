@@ -117,6 +117,7 @@ body {
     display: grid;
     grid-template-columns:  1fr 1fr 1fr 1fr;
 
+
 }
 
 
@@ -210,9 +211,10 @@ body {
 
 .list-users {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
     margin-top: 20px;
-}
+} 
 
 .fade {
     transition-delay: 2s;
@@ -225,7 +227,7 @@ footer {
     color: white;
     position: relative;
     bottom: 0;
-    margin-top: 400px;
+    margin-top: 670px;
 }
 
 .copy {
@@ -342,9 +344,13 @@ footer {
 
 .profil-user {
 
-    max-width: 300px;
+    margin-top: 20px;
+    max-width: 350px;
     padding: 10px;
-    
+}
+
+.changemode {
+    width: 259px;
 }
 
 .article-btn ,.login-connect-btn , .login-create-btn  {
@@ -376,11 +382,21 @@ footer {
 
 .profil-user-info {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+
 }
 .label-info-perso {
     margin: 10px;
-    color: var(--text-color)
+    color: var(--text-color);
+    
+}
+
+
+.form-changerole{
+    width: 300px;
+    display: flex;
+    margin-left: 20px;
+
 }
 .nav-link {
     color: var(--text-color);
